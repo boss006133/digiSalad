@@ -1,0 +1,4 @@
+/// 取得該間距width
+@function mediaQueryIn($key) {
+  @return map-get($mediaQueryList, $key);
+}

@@ -1,0 +1,15 @@
+@each $name, $value in $mediaQueryList {
+  .#{$name} {
+    max-width: $value;
+    margin: 0 auto;
+    @if $name == media-pc_99 {
+      @include mediaMax($name) {
+        margin: 0;
+      }
+    } @else {
+      @include mediaMax($name) {
+        margin: 0 16px;
+      }
+    }
+  }
+}

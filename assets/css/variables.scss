@@ -1,0 +1,43 @@
+// @use 'sass:math';
+
+/*================== Media Query 區間設定 ==================*/
+/// 如有修改請同步
+/// 1. path:@/constants/common.ts => const media
+/// 2. path:nuxt.config.js => vuetify.breakpoint.thresholds
+$mediaQueryList: (
+  media-pc_99: 1920px,
+  media-pc_00: 1720px,
+  media-pc_01: 1600px,
+  media-pc_02: 1460px,
+  media-pc_03: 1280px,
+  media-pc_03_a: 1200px,
+  media-pc_04: 1024px,
+  media-mb_00: 992px,
+  media-mb_01: 768px,
+  media-mb_02: 640px,
+  media-mb_03: 550px,
+  media-mb_04: 481px,
+);
+
+/*================== 共用字型設定 ==================*/
+$fontfamily1: 'Noto Sans TC';
+$fontfamily2: 'Poppins';
+$fontfamily3: 'Cardo';
+$fontfamily4: mina;
+$fontfamily_pc: $fontfamily2, $fontfamily1, sans-serif, 'Microsoft Jhenghei';
+$fontfamily_mb: sans-serif, 'Microsoft Jhenghei';
+
+/*================== 其他 ==================*/
+$headerStickyClass: '.header-sticky';
+$hasScrollSmoothClass: '.has-scroll-smooth';
+$hasScrollSmoothNavClass: '.has-scroll-smooth-nav';
+$hasHeaderAds: '.has-header-ads';
+$navShowClass: '.nav-menu--show';
+$searchMenuMobileShowClass: '.search-menu-mobile--show';
+$popoverContentShowClass: '.ob-popover-content--show';
+$compTypeListStickyClass: '.comp_type_list--sticky';
+$compTypeListUpClass: '.comp_type_list--up';
+
+$animeCubic1: cubic-bezier(0.48, 0.46, 0.14, 0.98);
+$animeCubic2: cubic-bezier(0.57, 0.55, 0.19, 1);
+$animeCubic3: cubic-bezier(0.66, 0.26, 0.1, 0.95);

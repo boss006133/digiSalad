@@ -1,0 +1,5 @@
+footer {
+  :not(#{$hasScrollSmoothClass}).has-scroll-init & {
+    transition: filter 0.15s linear, transform 0.4s ease;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"]
+    },
+    "types": [
+      "node",
+      "@nuxtjs/axios",
+      "@types/node",
+      "@nuxt/types",
+      "@nuxt/vue-app",
+      "@pinia/nuxt"
+    ]
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "./**/*.json", "./**/*.vue", "nuxt.config.js"] // add json path
+}

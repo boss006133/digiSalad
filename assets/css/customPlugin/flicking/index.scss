@@ -1,0 +1,14 @@
+@import './arrow';
+@import './pagination';
+
+.panel-with-link {
+  -webkit-user-select: none;
+}
+
+.flicking-viewport img,
+.flicking-panel img,
+.panel-with-link {
+  -webkit-user-drag: none;
+  -ms-user-select: none;
+  user-select: none;
+}

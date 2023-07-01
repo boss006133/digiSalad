@@ -1,0 +1,140 @@
+//#region media query 共用方法
+//小於
+@mixin mediaMax($key) {
+  @media all and (max-width: mediaQueryIn($key)) {
+    @content;
+  }
+}
+//大於
+@mixin mediaMin($key) {
+  @media all and (min-width: (mediaQueryIn($key) + 1px)) {
+    @content;
+  }
+}
+//#endregion
+
+//使用者無法選取
+@mixin user-select-none() {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+@mixin fontNotoSansTC() {
+  font-family: $fontfamily_pc;
+}
+//文字大小rem轉換
+@mixin fontSize($px, $important: null) {
+  // font-size: math.div($px, 16px) + rem;
+  @if $important == important {
+    font-size: $px / 16px + rem !important;
+  } @else {
+    font-size: $px / 16px + rem;
+  }
+}
+//文字大小10px
+@mixin fontSize10() {
+  @include fontSize(12px);
+  transform: scale(0.83333);
+}
+//文字大小11px
+@mixin fontSize11() {
+  @include fontSize(12px);
+  transform: scale(0.91666);
+}
+
+/** 
+   文字省略
+   $clamp:行數
+*/
+@mixin line-clamp($clamp: 1) {
+  @if $clamp == 1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    white-space: normal;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $clamp; /*省略第n行後的文字*/
+    -webkit-box-orient: vertical; /*設定元素是垂直布局*/
+  }
+}
+
+//#region 商品圖片size比例設定
+@mixin getImgBoxSize($w, $h, $containerW) {
+  @if $containerW != -1 {
+    width: calc(#{$w / $containerW * 100%});
+  }
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: calc(#{$h / $w * 100%});
+  }
+}
+//#endregion
+
+//#region nuxt transition
+@mixin transition-fade {
+  &.ob-fade {
+    &-enter {
+      transition: none;
+      // transform: translate(-10%, 0);
+      opacity: 0;
+      &-to {
+        transition: all 0.5s ease;
+        // transform: translate(0%, 0);
+        opacity: 1;
+      }
+    }
+    &-leave {
+      transition: none !important;
+      // transform: translate(0%, 0) !important;
+      opacity: 1;
+      &-to {
+        transition: all 0.25s ease !important;
+        // transform: translate(10%, 0);
+        opacity: 0;
+      }
+    }
+  }
+}
+@mixin transition-slideIn-move($type) {
+  @if $type == top {
+    transform: translate(0%, -10%);
+  } @else if $type == bottom {
+    transform: translate(0%, 10%);
+  } @else if $type == right {
+    transform: translate(10%, 0);
+  } @else if $type == left {
+    transform: translate(-10%, 0);
+  } @else {
+    transform: translate(0%, 10%);
+  }
+}
+@mixin transition-slideIn($type) {
+  &.ob-slideIn {
+    &-enter {
+      transition: none;
+      opacity: 0;
+      @include transition-slideIn-move($type);
+      &-to {
+        transition: all 0.25s ease;
+        // transform: translate(0%, 0);
+        opacity: 1;
+      }
+    }
+    &-leave {
+      transition: none !important;
+      // transform: translate(0%, 0) !important;
+      opacity: 1;
+      &-to {
+        transition: all 0.25s ease !important;
+        opacity: 0;
+        @include transition-slideIn-move($type);
+      }
+    }
+  }
+}
+//#endregion

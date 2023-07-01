@@ -1,0 +1,10 @@
+/*================== 文字大小 ==================*/
+:root {
+  --ob_FontSize: 16px;
+}
+/*================== Media Query 區間設定 ==================*/
+:root {
+  @each $name, $value in $mediaQueryList {
+    --#{$name}: #{$value};
+  }
+}

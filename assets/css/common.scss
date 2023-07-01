@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* width */
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 99em;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+  }
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    margin: 0;
+  }
+  &[block] {
+    display: block;
+  }
+  &[inline] {
+    display: inline;
+  }
+  &[inline-block] {
+    display: inline-block;
+  }
+}
+html {
+  @include fontNotoSansTC();
+  font-size: var(--ob_FontSize);
+  &:not(#{$hasScrollSmoothClass}).has-scroll-init {
+    overflow: visible;
+  }
+  &:not(#{$hasScrollSmoothClass}) {
+    .main-flex-outer {
+      overflow-x: clip !important;
+    }
+    #main-flex-inner {
+      overflow-y: visible !important;
+    }
+  }
+  &#{$hasScrollSmoothClass} {
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  &.scroll--stop {
+    overflow: hidden !important;
+  }
+}
+body {
+  @include fontNotoSansTC();
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+
+  .#{$uaMobile} & {
+    padding-right: 0 !important;
+  }
+  :not(#{$hasScrollSmoothClass}).has-scroll-init & {
+    overflow: visible;
+  }
+  ::selection {
+    color: #fff;
+  }
+}
+#__nuxt,
+#__layout {
+}
+a,
+button,
+img,
+input,
+svg,
+textarea {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  border: 0px;
+  background-color: transparent;
+}
+a {
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+  &::selection {
+    background-color: transparent !important;
+  }
+}
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+iframe {
+  border: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+.main-flex-outer {
+  overflow-x: hidden;
+}
+#main-flex-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(var(--vh) * 100);
+  //overflow-y: hidden !important;
+  transition: filter 0.15s linear, transform 0.4s ease;
+}
+main {
+  position: relative;
+  flex-grow: 1;
+  @include fontNotoSansTC();
+  :not(#{$hasScrollSmoothClass}).has-scroll-init & {
+    transition: filter 0.15s linear, transform 0.4s ease;
+  }
+  &,
+  .main__inner {
+    > .container {
+      padding: 0;
+      max-width: 100%;
+      width: 100%;
+      display: block;
+      position: relative;
+      z-index: 2;
+      // padding-bottom: 60px;
+      transition: min-height 0.6s cubic-bezier(0.41, 0.16, 0.28, 0.98);
+      @include mediaMax('media-mb_00') {
+        padding-bottom: 134px;
+      }
+    }
+  }
+}
+.main__inner {
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+[data-nuxt-page] {
+  /** transition start **/
+  @include transition-fade();
+  /** transition end **/
+}
+// .scrollbar-track {
+//   background-color: #cccccc !important;
+// }
+.scrollbar-thumb {
+}

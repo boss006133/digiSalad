@@ -1,0 +1,74 @@
+.nav-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  .nav-menu__container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    width: 600px;
+    max-width: calc(100vw);
+    overflow: hidden;
+    nav {
+      position: relative;
+    }
+    > .bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 0;
+      background-color: #eeee;
+      transition: all var(--NAV_MENU__closeDuration) $animeCubic1;
+      transform-origin: left;
+      transform: scaleX(0);
+      #{$navShowClass} & {
+        transform: none;
+      }
+    }
+  }
+  #{$navShowClass} & {
+  }
+}
+// #{$navShowClass} {
+//   &#{$hasScrollSmoothClass}.has-scroll-init {
+//     #main-flex-inner,
+//     #ob-floatBar .ob-floatBar__boxInner,
+//     #tab_bar,
+//     #ob-quick-buy-bar {
+//       transform: translateX(20px);
+//       //會lag
+//       //filter: blur(3px);
+
+//       // for only firefox
+//       @-moz-document url-prefix() {
+//         filter: blur(0px);
+//       }
+//     }
+//   }
+//   &:not(#{$hasScrollSmoothClass}).has-scroll-init {
+//     header,
+//     main,
+//     footer,
+//     #ob-floatBar .ob-floatBar__boxInner,
+//     #tab_bar,
+//     #ob-quick-buy-bar {
+//       transform: translateX(20px);
+//       .#{$uaPc} & {
+//         //會lag
+//         //filter: blur(3px);
+
+//         // for only firefox
+//         @-moz-document url-prefix() {
+//           filter: blur(0px);
+//         }
+//       }
+//     }
+//   }
+// }
