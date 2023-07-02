@@ -15,7 +15,6 @@ if (!Vue.__global_mixin) {
       return {
         body_finished_class: 'finished',
         body_loadingfinished_class: 'loading-finished',
-        OBTitle: process.env.OBTitle,
       }
     },
     computed: {
@@ -26,6 +25,7 @@ if (!Vue.__global_mixin) {
         'isloadingAnimationDone',
         'isLocomotiveScrollDone',
         'isIndexpage',
+        'screenWidth',
         'mediaQuery',
         'deviceBrowser',
         'isPageFocus', // 偵測是否正在瀏覽網頁
@@ -78,7 +78,7 @@ if (!Vue.__global_mixin) {
       //注入css style :root --vh
       setVH() {
         const self = this as any
-        let vh = window.innerHeight * 0.01
+        const vh = window.innerHeight * 0.01
         self.$setHtmlCssVar({
           '--vh': `${vh}px`,
         })

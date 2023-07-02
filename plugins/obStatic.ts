@@ -13,6 +13,17 @@ if (process.client) {
         return document.body.clientWidth
       }
     }
+    OB_STATIC.GetWindowHeight = function () {
+      if (self.innerHeight) {
+        return self.innerHeight
+      }
+      if (document.documentElement && document.documentElement.clientHeight) {
+        return document.documentElement.clientHeight
+      }
+      if (document.body) {
+        return document.body.clientHeight
+      }
+    }
     // check isMobile
     OB_STATIC.isMobile = function () {
       let isMobile = false // initiate as false

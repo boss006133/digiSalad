@@ -9,7 +9,7 @@ export default {
   target: 'server',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'digiSalad',
+    title: 'DigiSalad',
     htmlAttrs: {
       lang: 'en',
     },
@@ -185,5 +185,8 @@ export default {
       removeComments: true,
       removeEmptyElements: true,
     },
+  },
+  env: {
+    ...env.parsed,
   },
 }

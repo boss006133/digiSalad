@@ -41,9 +41,7 @@ export default Vue.extend({
   components: {},
   mixins: [mixinLayouts],
   data() {
-    return {
-      // title: this.OBTitle,
-    }
+    return {}
   },
   head() {
     return {}

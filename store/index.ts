@@ -141,7 +141,7 @@ const actions = {
   },
   [actionIndex.SET_HTMLCSSVAR](value) {
     const self = this as any
-    self.htmlCssVar = { ...value, ...self.htmlCssVar }
+    self.htmlCssVar = { ...self.htmlCssVar, ...value }
   },
 }
 export default defineStore('globalStore', {

@@ -22,9 +22,7 @@ export default {
     }
   },
   head() {
-    return {
-      title: `首頁${(this as any).OBTitle}`,
-    }
+    return {}
   },
   computed: {
     ...mapState(useGlobalStore, ['htmlCssVarInline']),
@@ -98,6 +96,7 @@ export default {
     let resizeTimer
     const g_w = window.OB_STATIC.GetWindowWidth()
     let windowWidth = window.OB_STATIC.GetWindowWidth()
+    let windowHeight = window.OB_STATIC.GetWindowHeight()
     // 監聽media query寬度分界切換事件
     self[actionIndex.SET_MEDIATEMP]({ w: g_w, firstLoad: true })
     self[actionIndex.SET_SCREENWIDTH](g_w)
@@ -106,9 +105,12 @@ export default {
     window.addEventListener('resize', function () {
       const s = window.OB_STATIC.GetWindowWidth()
       clearTimeout(resizeTimer)
-      if (window.OB_STATIC.GetWindowWidth() !== windowWidth) {
+      self.setVH()
+      if (
+        window.OB_STATIC.GetWindowWidth() !== windowWidth ||
+        window.OB_STATIC.GetWindowHeight() !== windowHeight
+      ) {
         windowWidth = window.OB_STATIC.GetWindowWidth()
-        self.setVH()
         // 監聽視窗width
         self[actionIndex.SET_SCREENWIDTH](s)
         // 監聽視窗resize
