@@ -249,26 +249,31 @@
           height: 100%;
         }
       }
-      > .content {
-        max-width: 1007px;
-        margin: 0 auto;
+      > .sec-content {
         margin-top: 30px;
-        text-align: center;
-        @include fontSize(16px);
-        font-weight: 400;
-        line-height: 28px;
-        letter-spacing: 1px;
-      }
-      .btn__container {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
       }
     }
 
     &.awards {
       position: relative;
       margin-top: 70px;
+      display: flex;
+      justify-content: flex-end;
+      .sec-title-warp {
+        justify-content: flex-start;
+      }
+      .sec-title {
+        > .text > .dot {
+          left: 7px;
+        }
+        > .wave {
+          display: block;
+          background-image: url('/image/wave.svg');
+          background-repeat: no-repeat;
+          width: 191px;
+          margin-left: 0px;
+        }
+      }
       .awards-board-wrap {
         position: relative;
         z-index: 1;
@@ -276,9 +281,33 @@
       }
       .awards-board {
         background-color: #fff;
-        border-radius: 99em;
+        border-radius: 50px;
         border-top-right-radius: 0;
         padding: 65px 69px;
+        display: flex;
+        > .contentBox {
+          width: 33.333333%;
+          min-width: 416px;
+        }
+        > .awardList {
+          flex: 1;
+          padding-left: 37px;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          margin-left: -37px;
+          margin-top: -10px;
+          > * {
+            max-width: 50%;
+            padding-left: 37px;
+            padding-top: 10px;
+          }
+        }
+        .sec-content {
+          margin-top: 30px;
+          max-width: none;
+          text-align: left;
+        }
       }
       .half-bg {
         position: absolute;
@@ -288,7 +317,7 @@
         right: 0;
         bottom: 0;
         background-color: $themeColor1;
-        border-top-left-radius: 99em;
+        border-top-left-radius: 50px;
       }
     }
     &.ourIngradients {
@@ -305,6 +334,10 @@
           width: 369px;
           margin-left: 20px;
         }
+      }
+      > .sec-content {
+        margin-top: 43px;
+        color: #fff;
       }
     }
   }
@@ -339,6 +372,20 @@
       height: 13px;
       width: 100%;
     }
+  }
+  .sec-content {
+    max-width: 1007px;
+    margin: 0 auto;
+    text-align: center;
+    @include fontSize(16px);
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 1px;
+  }
+  .btn__container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
   }
 }
 

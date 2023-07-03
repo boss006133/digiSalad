@@ -45,5 +45,11 @@
   }
   &--second {
     background-color: $themeColor5;
+    &:hover {
+      background-color: darken($themeColor5, 5%);
+    }
+    &:active {
+      background-color: lighten($themeColor5, 5%);
+    }
   }
 }
