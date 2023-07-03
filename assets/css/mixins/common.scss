@@ -21,7 +21,7 @@
   -o-user-select: none;
   user-select: none;
 }
-@mixin fontNotoSansTC() {
+@mixin fontFamilyG() {
   font-family: $fontfamily_pc;
 }
 //文字大小rem轉換

@@ -17,4 +17,5 @@ export const action = {
   SET_MEDIA: 'setMedia',
   SET_MEDIATEMP: 'setMediaTemp',
   SET_HTMLCSSVAR: 'setHtmlCssVariables',
+  SET_YTAPI_DONE: 'setYtApiDone',
 }

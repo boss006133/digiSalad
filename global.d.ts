@@ -22,5 +22,8 @@ declare global {
     LocomotiveScroll: any
     LocomotiveScrollNav: any
     OB_STATIC: any
+    onYouTubeIframeAPIReady: any
+    YT: any
+    YtPlayer: any
   }
 }

@@ -37,7 +37,7 @@
   }
 }
 html {
-  @include fontNotoSansTC();
+  @include fontFamilyG();
   font-size: var(--ob_FontSize);
   &:not(#{$hasScrollSmoothClass}).has-scroll-init {
     overflow: visible;
@@ -63,7 +63,7 @@ html {
   }
 }
 body {
-  @include fontNotoSansTC();
+  @include fontFamilyG();
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
   overflow: hidden;
@@ -135,7 +135,7 @@ ul {
 main {
   position: relative;
   flex-grow: 1;
-  @include fontNotoSansTC();
+  @include fontFamilyG();
   :not(#{$hasScrollSmoothClass}).has-scroll-init & {
     transition: filter 0.15s linear, transform 0.4s ease;
   }

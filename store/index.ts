@@ -19,6 +19,7 @@ const state = () => ({
   pageTransitionAfterEnter: true,
   isloadingAnimationDone: false, // 開場動畫結束
   isLocomotiveScrollDone: false, // 第三方smooth scroll載入完成
+  isYtApiDone: false, // youtube api 載入完成
   deviceBrowser: null,
   isPageFocus: true,
   pageLoading: false,
@@ -138,6 +139,10 @@ const actions = {
           obj.tempDirection !== '' && obj.tempDirection !== obj.direction
       obj.tempDirection = value.w <= obj.width ? 'down' : 'up'
     }
+  },
+  [actionIndex.SET_YTAPI_DONE](value) {
+    const self = this as any
+    self.isYtApiDone = value
   },
   [actionIndex.SET_HTMLCSSVAR](value) {
     const self = this as any

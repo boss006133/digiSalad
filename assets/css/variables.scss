@@ -1,4 +1,4 @@
-// @use 'sass:math';
+@use 'sass:math';
 
 /*================== Media Query 區間設定 ==================*/
 /// 如有修改請同步
@@ -11,7 +11,7 @@ $mediaQueryList: (
   media-pc_02: 1460px,
   media-pc_03: 1280px,
   media-pc_03_a: 1200px,
-  media-pc_04: 1024px,
+  media-pc_04: 1000px,
   media-mb_00: 992px,
   media-mb_01: 768px,
   media-mb_02: 640px,
@@ -20,12 +20,12 @@ $mediaQueryList: (
 );
 
 /*================== 共用字型設定 ==================*/
-$fontfamily1: 'Noto Sans TC';
-$fontfamily2: 'Poppins';
-$fontfamily3: 'Cardo';
-$fontfamily4: mina;
-$fontfamily_pc: $fontfamily2, $fontfamily1, sans-serif, 'Microsoft Jhenghei';
+$fontfamily1: 'proxima-nova';
+$fontfamily_pc: $fontfamily1, sans-serif, 'Microsoft Jhenghei';
 $fontfamily_mb: sans-serif, 'Microsoft Jhenghei';
+
+/*================== 主顏色 ==================*/
+$themeColor1: #26c6d0;
 
 /*================== 其他 ==================*/
 $headerStickyClass: '.header-sticky';

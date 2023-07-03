@@ -22,7 +22,10 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://use.typekit.net/wel8ibk.css' },
+    ],
   },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/global'],
@@ -38,6 +41,7 @@ export default {
     { src: '~/plugins/inject/index' },
     { src: '~/plugins/nuxt-server-init.server' },
     { src: '~/plugins/inject/popup' },
+    { src: '~/plugins/third-party/youtubeApi.client' },
     { src: '~/plugins/third-party/locomotiveScroll.client' }, // https://github.com/locomotivemtl/locomotive-scroll
     { src: '~/plugins/obStatic', mode: 'client' },
     { src: '~/plugins/mixin/mixin' },

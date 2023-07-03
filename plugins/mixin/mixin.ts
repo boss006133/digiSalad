@@ -29,6 +29,7 @@ if (!Vue.__global_mixin) {
         'mediaQuery',
         'deviceBrowser',
         'isPageFocus', // 偵測是否正在瀏覽網頁
+        'isYtApiDone', // 偵測是否YtApi載入完成
       ]),
       ...mapState(useGlobalStore, {
         isPageLoadFinishedAfter: (state: any) =>
