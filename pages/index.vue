@@ -27,23 +27,64 @@
       <div class="default-bg"></div>
       <div class="video-wrap">
         <div :id="`${bannerVideoId}`" class="brand-video"></div>
-        <!-- <iframe
-          :id="`${bannerVideoId}`"
-          class="brand-video"
-          width="1280"
-          height="720"
-          src="https://www.youtube.com/embed/8_4JRK4QkqU?wmode=transparent&modestbranding=0&autohide=0&branding=0&controls=0&showinfo=0&autoplay=1&mute=1&rel=0&enablejsapi=1&widgetid=1&loop=1&playlist=8_4JRK4QkqU"
-          title="[DigiSalad Showcase] Digital Real Time Display for Cathay Pacific"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-        ></iframe> -->
       </div>
     </section>
     <!-- ABOUT DIGISALAD -->
-    <section class="aboutDigiSalad"></section>
+    <section class="aboutDigiSalad">
+      <div class="sec-title-warp">
+        <div class="sec-title">
+          <div class="text">ABOUT DIGISALAD<span class="dot"></span></div>
+          <div class="wave"></div>
+        </div>
+      </div>
+      <div class="video-wrap">
+        <div
+          class="cover"
+          @click="playAboutVideo"
+          :class="{ playing: aboutYtPlaying }"
+        >
+          <div class="btn-play-wrap"><div class="btn-play"></div></div>
+        </div>
+        <div :id="`${aboutVideoId}`" class="about-video"></div>
+      </div>
+      <div class="content">
+        <p>
+          Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras
+          ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta.
+          Nam condimentum vitae ligula vel ornare. Phasellus at semper turpis.
+          Nunc eu tellus tortor. Etiam at condimentum nisl, vitae sagittis orci.
+          Donec id dignissim nunc. Donec elit ante, eleifend a dolor et,
+          venenatis facilisis dolor. In feugiat orci odio, sed lacinia sem
+          elementum quis. Aliquam consectetur, eros et vulputate euismod, nunc
+          leo tempor lacus, ac rhoncus neque eros nec lacus. Cras lobortis
+          molestie faucibus.
+        </p>
+      </div>
+      <div class="btn__container">
+        <div class="item">
+          <button class="ds-button ds-button--primary">
+            <span class="text">VIEW MORE</span>
+          </button>
+        </div>
+      </div>
+    </section>
     <!-- AWARDS -->
+    <section class="awards">
+      <div class="awards-board-wrap">
+        <div class="awards-board"></div>
+      </div>
+
+      <div class="half-bg"></div>
+    </section>
     <!-- OUR INGRADIENTS -->
+    <section class="ourIngradients">
+      <div class="sec-title-warp">
+        <div class="sec-title">
+          <div class="text">OUR INGRADIENTS<span class="dot"></span></div>
+          <div class="wave gray"></div>
+        </div>
+      </div>
+    </section>
     <!-- OUR BRAND EXPERIENCE -->
     <!-- PROJECTS -->
   </div>

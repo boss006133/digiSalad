@@ -1,7 +1,5 @@
 /* eslint-disable no-useless-escape */
 if (process.client) {
-  const vh = window.innerHeight * 0.01
-  document.documentElement.style.setProperty('--vh', `${vh}px`)
   ;(function (OB_STATIC) {
     // get window width
     OB_STATIC.GetWindowWidth = function () {

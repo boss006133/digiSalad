@@ -7,8 +7,13 @@ export default Vue.extend({
   },
   data() {
     return {
-      embedId: '8_4JRK4QkqU',
+      bannerEmbedId: '8_4JRK4QkqU',
+      aboutEmbedId: 'IeIRJ9jZ5Ro',
       bannerVideoId: 'digiSalad_brand_yt',
+      aboutVideoId: 'digiSalad_about_yt',
+      bannerYtPlayer: null,
+      aboutYtPlayer: null,
+      aboutYtPlaying: false,
     }
   },
   head() {
@@ -39,6 +44,7 @@ export default Vue.extend({
         if (newValue) {
           setTimeout(() => {
             self.createBannerYtPlay()
+            self.createAboutYtPlay()
           }, 100)
         }
       },
@@ -58,41 +64,95 @@ export default Vue.extend({
       const self = this as any
       if (!window.YT) return
       self.$nextTick(() => {
-        window.YtPlayer = self.YtPlayer = new window.YT.Player(
-          `${self.bannerVideoId}`,
-          {
-            height: '720',
-            width: '1280',
-            videoId: self.embedId,
-            host: 'https://www.youtube-nocookie.com',
-            playerVars: {
-              widgetid: 1,
-              autoplay: 1,
-              branding: 0,
-              controls: 0,
-              enablejsapi: 1,
-              loop: 1,
-              mute: 1,
-              playlist: self.embedId,
-              rel: 0,
-              showinfo: 0,
-              modestbranding: 0,
-            },
-            events: {
-              onReady: self.onYTPlayerReady,
-              //   onStateChange: self.onYTPlayerStateChange,
-            },
-          }
-        )
+        self.bannerYtPlayer = new window.YT.Player(`${self.bannerVideoId}`, {
+          height: '720',
+          width: '1280',
+          videoId: self.bannerEmbedId,
+          host: 'https://www.youtube-nocookie.com',
+          playerVars: {
+            widgetid: 1,
+            autoplay: 1,
+            branding: 0,
+            controls: 0,
+            enablejsapi: 1,
+            loop: 1,
+            mute: 1,
+            playlist: self.bannerEmbedId,
+            rel: 0,
+            showinfo: 0,
+            modestbranding: 0,
+          },
+          events: {
+            onReady: self.onBannerYTPlayerReady,
+            //   onStateChange: self.onYTPlayerStateChange,
+          },
+        })
       })
     },
     //youtube player ready
-    onYTPlayerReady(event) {
+    onBannerYTPlayerReady(event) {
       const self = this as any
       self.setVideoWidth()
 
       //banner animation start
       self.bannerAnimation()
+    },
+    //create youtube video api
+    createAboutYtPlay() {
+      const self = this as any
+      if (!window.YT) return
+      self.$nextTick(() => {
+        self.aboutYtPlayer = new window.YT.Player(`${self.aboutVideoId}`, {
+          height: '720',
+          width: '1280',
+          videoId: self.aboutEmbedId,
+          host: 'https://www.youtube-nocookie.com',
+          playerVars: {
+            widgetid: 1,
+            autoplay: 0,
+            branding: 0,
+            controls: 1,
+            enablejsapi: 1,
+            loop: 1,
+            mute: 0,
+            playlist: self.aboutEmbedId,
+            rel: 0,
+            showinfo: 0,
+            modestbranding: 0,
+          },
+          events: {
+            //onReady: self.onYTPlayerReady,
+            onStateChange: self.onAboutYTPlayerStateChange,
+          },
+        })
+      })
+    },
+    playAboutVideo() {
+      const self = this as any
+      //撥放
+      self.aboutYtPlayer.playVideo()
+    },
+    onAboutYTPlayerStateChange(event) {
+      const self = this as any
+      /**
+       * -1:尚未開始
+       * 0:已結束
+       * 1:播放中
+       * 2:已暫停
+       * 3:緩衝處理中
+       * 5:提示的影片
+       */
+      switch (event.data) {
+        case 1: //播放中
+          self.aboutYtPlaying = true
+          break
+        case 2: //已暫停
+          self.aboutYtPlaying = false
+          console.warn(222)
+          break
+        default:
+          break
+      }
     },
     //計算banner影片size
     setVideoWidth() {

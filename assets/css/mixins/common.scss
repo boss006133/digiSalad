@@ -28,9 +28,9 @@
 @mixin fontSize($px, $important: null) {
   // font-size: math.div($px, 16px) + rem;
   @if $important == important {
-    font-size: $px / 16px + rem !important;
+    font-size: calc($px / 16px) + rem !important;
   } @else {
-    font-size: $px / 16px + rem;
+    font-size: calc($px / 16px) + rem;
   }
 }
 //文字大小10px

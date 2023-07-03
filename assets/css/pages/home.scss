@@ -10,9 +10,12 @@
         position: relative;
         z-index: 3;
         min-height: calc(var(--vh) * 100);
+        display: flex;
+        align-items: center;
       }
       .main-content {
-        padding: 12.7% 15.5% 0;
+        padding: 0% 15.5% 0;
+        margin-top: -7%;
         .slogan {
           margin-top: 34px;
           color: #fff;
@@ -102,32 +105,16 @@
             position: absolute;
             right: 0;
             top: 0;
+            bottom: 0;
+            background-color: #808080;
           }
           &:before {
-            // -webkit-transform: scaleY(0);
-            // transform: scaleY(0);
-            // -webkit-transition: all 0.8s ease-in-out;
-            // transition: all 0.8s ease-in-out;
-            // -webkit-transition-delay: 0.4s;
-            // transition-delay: 0.4s;
-            background-color: #fff;
-            height: 50%;
-            z-index: 2;
-            opacity: 0;
-            // animation: scroll-line-before-move 4s ease-in-out infinite;
-            // animation-fill-mode: forwards;
+            animation: scroll-line-before-move 4s $animeCubic2 infinite;
+            animation-delay: 0.2s;
+            animation-fill-mode: forwards;
           }
           &:after {
-            // -webkit-transform: scaleY(0);
-            // transform: scaleY(0);
-            // -webkit-transform-origin: top;
-            // transform-origin: top;
-            // -webkit-transition: all 0.8s ease-in-out;
-            // transition: all 0.8s ease-in-out;
-            background-color: #808080;
-            bottom: 0;
-            z-index: 1;
-            animation: scroll-line-after-move 4s ease-in-out infinite;
+            animation: scroll-line-after-move 4s $animeCubic2 infinite;
             animation-fill-mode: forwards;
           }
         }
@@ -184,17 +171,186 @@
       }
     }
     &.aboutDigiSalad {
-      height: 2000px;
+      padding-top: 125px;
+      .sec-title {
+        > .wave {
+          display: block;
+          background-image: url('/image/wave.svg'), url('/image/wave.svg');
+          background-repeat: no-repeat, no-repeat;
+          background-position: 0px 0, right 1px center;
+          width: 369px;
+          margin-left: 20px;
+        }
+      }
+      .video-wrap {
+        position: relative;
+        max-width: 960px;
+        margin: 0 auto;
+        margin-top: 71px;
+        &:after {
+          content: '';
+          display: block;
+          padding-bottom: calc(720 / 1280) * 100%;
+        }
+        > .cover {
+          cursor: pointer;
+          position: absolute;
+          z-index: 2;
+          left: 0;
+          top: 0;
+          right: -1px;
+          height: 100%;
+          background-image: url('/image/video-thumbnail.png');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          transition: all 0.3s ease;
+          &:hover {
+            .btn-play {
+              transform: scale(1.1);
+            }
+          }
+          .btn-play-wrap {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 11.77%;
+            display: flex;
+            &:after {
+              content: '';
+              display: block;
+              padding-bottom: 100%;
+            }
+          }
+          .btn-play {
+            width: 100%;
+            background-image: url('/image/media-play-symbol.svg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            transition: all 0.35s $animeCubic1;
+          }
+          &.playing {
+            opacity: 0;
+            pointer-events: none;
+            transition-delay: 0.1s;
+            .btn-play {
+              transform: scale(1.5);
+              opacity: 0;
+            }
+          }
+        }
+        > iframe {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+      > .content {
+        max-width: 1007px;
+        margin: 0 auto;
+        margin-top: 30px;
+        text-align: center;
+        @include fontSize(16px);
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: 1px;
+      }
+      .btn__container {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    &.awards {
+      position: relative;
+      margin-top: 70px;
+      .awards-board-wrap {
+        position: relative;
+        z-index: 1;
+        margin-left: 98px;
+      }
+      .awards-board {
+        background-color: #fff;
+        border-radius: 99em;
+        border-top-right-radius: 0;
+        padding: 65px 69px;
+      }
+      .half-bg {
+        position: absolute;
+        z-index: 0;
+        height: 50%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $themeColor1;
+        border-top-left-radius: 99em;
+      }
+    }
+    &.ourIngradients {
+      padding-top: 104px;
+      padding-bottom: 129px;
+      background-color: $themeColor1;
+      .sec-title {
+        color: #fff;
+        > .wave {
+          display: block;
+          background-image: url('/image/wave2.svg'), url('/image/wave2.svg');
+          background-repeat: no-repeat, no-repeat;
+          background-position: 0px 0, right 1px center;
+          width: 369px;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  .sec-title-warp {
+    display: flex;
+    justify-content: center;
+  }
+  .sec-title {
+    @include fontSize(28px);
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 3.636px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    > .text {
+      > .dot {
+        display: inline-block;
+        width: 10px;
+        border-radius: 50%;
+        background-color: $themeColor2;
+        position: relative;
+        left: 15px;
+        &::after {
+          content: '';
+          display: block;
+          padding-bottom: 100%;
+        }
+      }
+    }
+    > .wave {
+      height: 13px;
+      width: 100%;
     }
   }
 }
+
 @keyframes scroll-line-before-move {
   0% {
-    transform: scale(0) translateY(-50%);
+    transform: scale(0) translateY(0%);
+    transform-origin: 50% 0%;
   }
   40%,
   100% {
-    transform: scaleY(1) translateY(200%);
+    transform: scaleY(1) translateY(0%);
+    transform-origin: 50% 0%;
   }
 }
 @keyframes scroll-line-after-move {

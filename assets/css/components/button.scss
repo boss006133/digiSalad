@@ -1,0 +1,49 @@
+.ds-button {
+  cursor: pointer;
+  color: #fff;
+  padding: 33px 24.5px;
+  transition: background 0.25s ease;
+  > .text {
+    @include fontSize(16px);
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 2.222px;
+    display: flex;
+    align-items: center;
+    transition: all 0.25s ease;
+    &:after {
+      content: '';
+      display: block;
+      width: 68px;
+      height: 1px;
+      background-color: #fff;
+      margin-left: 15px;
+      transition: transform 0.25s ease;
+      transform-origin: 100% 50%;
+    }
+  }
+  &:hover {
+    > .text {
+      transform: translateX(42px);
+      letter-spacing: 3px;
+      &:after {
+        transform: translateX(-50%) scaleX(0);
+      }
+    }
+  }
+}
+
+.ds-button {
+  &--primary {
+    background-color: $themeColor1;
+    &:hover {
+      background-color: darken($themeColor1, 5%);
+    }
+    &:active {
+      background-color: lighten($themeColor1, 5%);
+    }
+  }
+  &--second {
+    background-color: $themeColor5;
+  }
+}

@@ -63,6 +63,8 @@ html {
   }
 }
 body {
+  color: $themeColor3;
+  background-color: $themeColor4;
   @include fontFamilyG();
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
@@ -76,6 +78,7 @@ body {
   }
   ::selection {
     color: #fff;
+    background-color: $themeColor1;
   }
 }
 #__nuxt,
