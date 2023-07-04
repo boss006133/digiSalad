@@ -1,7 +1,23 @@
 import Vue, { PropOptions } from 'vue'
-import { IframeHTMLAttributes } from 'vue/types/jsx'
+import Flicking, { EVENTS } from '@egjs/flicking'
+import { Arrow } from '@egjs/flicking-plugins'
+import { NextOutlined, PrevOutlined } from '@/components/icons-ds'
+const animationDuration = 1000
+const flickingProjectsOptions = {
+  align: 'prev',
+  circular: true,
+  disableInput: false,
+  duration: 350,
+  //easing: easing.easeInOutCubic,
+  interruptable: true,
+  moveType: ['strict', { count: 1 }],
+  preventClickOnDrag: true,
+} as any
 export default Vue.extend({
-  components: {},
+  components: {
+    NextOutlined,
+    PrevOutlined,
+  },
   asyncData({ app, store, params, query, route }) {
     return {}
   },
@@ -14,6 +30,99 @@ export default Vue.extend({
       bannerYtPlayer: null,
       aboutYtPlayer: null,
       aboutYtPlaying: false,
+      ingradients: [
+        {
+          iconClass: 'i-ux-design',
+          icon: 'icon-ux-design',
+          name: 'UX Design',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-ui-design',
+          icon: 'icon-ui-design',
+          name: 'UI Design',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-web-dev',
+          icon: 'icon-web-dev',
+          name: 'website\r\ndevelopment',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-mobileApp-dev',
+          icon: 'icon-mobileApp-dev',
+          name: 'mobile app\r\ndevelopment',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-ecommerce',
+          icon: 'icon-ecommerce',
+          name: 'ecommerce',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-customer-loyalty',
+          icon: 'icon-customer-loyalty',
+          name: 'customer loyalty',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-digital-transformation',
+          icon: 'icon-digital-transformation',
+          name: 'digital\r\ntransformation',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-degital-marketing',
+          icon: 'icon-degital-marketing',
+          name: 'digital\r\nmarketing',
+          des: '',
+          btnText: 'VIEW MORE',
+        },
+        {
+          iconClass: 'i-branding',
+          icon: 'icon-branding',
+          name: 'BRANDING',
+          des: '',
+          btnText: 'BRANDING',
+        },
+      ],
+      projects: [
+        {
+          bannerSrc: '/image/project-1.png',
+          t1: 'HIGHLIGHTED SHOWCASE',
+          name: 'LP CLUB MOBILE APP',
+          des: '',
+        },
+        {
+          bannerSrc: '/image/project-2.jpeg',
+          t1: 'HIGHLIGHTED SHOWCASE',
+          name: 'HOUSE OF BEAUTY',
+          des: '',
+        },
+        {
+          bannerSrc: '/image/project-3.jpg',
+          t1: 'HIGHLIGHTED SHOWCASE',
+          name: 'NEODERM - GRATUS APP & WEBSITE',
+          des: '',
+        },
+        {
+          bannerSrc: '/image/project-4.jpeg',
+          t1: 'HIGHLIGHTED SHOWCASE',
+          name: 'AEON NETMEMBER APP',
+          des: '',
+        },
+      ],
+      flickingProjects: null,
+      flickingProjects_Arrow: null,
     }
   },
   head() {
@@ -57,6 +166,7 @@ export default Vue.extend({
   },
   mounted() {
     const self = this as any
+    self.initProjectsFlicking()
   },
   methods: {
     //create youtube video api
@@ -186,6 +296,33 @@ export default Vue.extend({
         ) as HTMLElement
         v.classList.add('loaded')
       }, 100)
+    },
+    //(banner)輪播套件-初始化
+    initProjectsFlicking() {
+      const self = this as any
+      self.$nextTick(() => {
+        setTimeout(() => {
+          const el = document.querySelector(`#flicking-projects`) as HTMLElement
+          if (!el) return
+          self.flickingProjects = new Flicking(el, {
+            ...flickingProjectsOptions,
+          })
+          //self.flickingKol.on(EVENTS.READY, self.onReady_Flicking)
+          self.flickingProjectsPlugins().forEach((plugin) => {
+            self.flickingProjects.addPlugins(plugin)
+          })
+        }, 1)
+      })
+    },
+    flickingProjectsPlugins() {
+      const self = this as any
+      self.flickingProjects_Arrow = new Arrow({
+        parentEl: document.querySelector(
+          `#projects-slideContainer`
+        ) as HTMLElement,
+      })
+      const plugins = [self.flickingProjects_Arrow]
+      return plugins
     },
   },
 })
