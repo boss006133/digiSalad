@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       serverPending: true,
-      bodyCoverFadeOute_duration: 250,
+      bodyCoverFadeOute_duration: 500,
       page_load_animation_delay: 0,
       loadingtext: 0,
       loadingtextEnd: false,
@@ -48,8 +48,6 @@ export default {
       const self = this as any
       // dom 畫面 & loading 全數結束
       window._body.classList.add(self.body_loadingfinished_class)
-      //window._body.classList.add(self.body_loadingfinished_header_class)
-
       setTimeout(() => {
         self.serverPending = false
       }, self.bodyCoverFadeOute_duration)

@@ -138,3 +138,26 @@
   }
 }
 //#endregion
+
+@mixin textUnderLine($thick: 6px, $color: $themeColor1, $doHover: '') {
+  background-image: linear-gradient($color, $color);
+  background-size: auto $thick;
+  background-position: left bottom 11px;
+  background-repeat: no-repeat;
+  padding: 0 10px;
+}
+
+@mixin dsDot() {
+  position: absolute;
+  left: calc(100% + 8px);
+  bottom: 23%;
+  display: block;
+  width: 10px;
+  border-radius: 50%;
+  background-color: $themeColor2;
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+}

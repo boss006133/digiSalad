@@ -1,5 +1,6 @@
 import Vue, { PropOptions } from 'vue'
-import Flicking, { EVENTS } from '@egjs/flicking'
+import { gsap } from 'gsap'
+import Flicking, { EVENTS, DIRECTION } from '@egjs/flicking'
 import { Arrow } from '@egjs/flicking-plugins'
 import { NextOutlined, PrevOutlined } from '@/components/icons-ds'
 const animationDuration = 1000
@@ -123,6 +124,9 @@ export default Vue.extend({
       ],
       flickingProjects: null,
       flickingProjects_Arrow: null,
+      flickingProjectsCurrent: 0,
+      flickingProjectsDirection: '',
+      bannerAnimeDone: false,
     }
   },
   head() {
@@ -132,19 +136,35 @@ export default Vue.extend({
     //偵測是否可以載入 youtube video
     canLoadYtVideo() {
       const self = this as any
-      return self.isYtApiDone
+      return self.isYtApiDone && self.bannerAnimeDone
+    },
+    projectsObject(): any {
+      const self = this as any
+      const r = self.projects[self.flickingProjectsCurrent]
+      return r ? r : {}
     },
   },
   watch: {
     $route(to, from) {
       const self = this as any
     },
+    isloadingAnimationDone() {
+      const self = this as any
+      //banner 進場動畫
+      const tl_banner = self.banner_AnimeStart()
+      tl_banner.play()
+      tl_banner.then(() => {
+        self.bannerAnimeDone = true
+      })
+    },
     ScreenResizeState() {
       const self = this as any
+      //reset banner video size
       self.setVideoWidth()
     },
     afterScreenResizeState() {
       const self = this as any
+      //reset banner video size
       self.setVideoWidth()
     },
     canLoadYtVideo: {
@@ -167,6 +187,7 @@ export default Vue.extend({
   mounted() {
     const self = this as any
     self.initProjectsFlicking()
+    self.initScrollAnime()
   },
   methods: {
     //create youtube video api
@@ -264,7 +285,7 @@ export default Vue.extend({
           break
       }
     },
-    //計算banner影片size
+    //calculate banner video size
     setVideoWidth() {
       const self = this
       try {
@@ -307,7 +328,11 @@ export default Vue.extend({
           self.flickingProjects = new Flicking(el, {
             ...flickingProjectsOptions,
           })
-          //self.flickingKol.on(EVENTS.READY, self.onReady_Flicking)
+          //self.flickingProjects.on(EVENTS.READY, self.onReady_Flicking)
+          self.flickingProjects.on(
+            EVENTS.WILL_CHANGE,
+            self.onWillChanged_Flicking
+          )
           self.flickingProjectsPlugins().forEach((plugin) => {
             self.flickingProjects.addPlugins(plugin)
           })
@@ -323,6 +348,324 @@ export default Vue.extend({
       })
       const plugins = [self.flickingProjects_Arrow]
       return plugins
+    },
+    onWillChanged_Flicking(e) {
+      const self = this as any
+      const direction = e.direction
+      const currentIndex = e.index
+      self.flickingProjectsDirection = direction
+      const tl_end = self.onChanged_Project_AnimeEnd()
+      tl_end.play()
+      tl_end.then(() => {
+        self.flickingProjectsCurrent = currentIndex
+        self.$nextTick(() => {
+          const tl_start = self.onChanged_Project_AnimeStart()
+          tl_start.play()
+        })
+      })
+    },
+    //project切換-動畫start
+    onChanged_Project_AnimeStart() {
+      const self = this as any
+      const ElemBg = self.$refs.galleryComp.querySelector('.project-bg')
+      const ElemT1 = self.$refs.galleryComp.querySelector('.t1Box')
+      const ElemName = self.$refs.galleryComp.querySelector('.nameBox')
+      const ElemNameUnderLine = ElemName.querySelector('.ds-anime-title .text')
+      const ElemNameDot = ElemName.querySelector('.ds-anime-title .dot')
+      const ElemDes = self.$refs.galleryComp.querySelector('.desBox')
+      const ElemBtn = self.$refs.galleryComp.querySelector('.btnBox .ds-button')
+      const ease = 'power2.inOut'
+      const d = self.flickingProjectsDirection === DIRECTION.NEXT ? 1 : -1
+      const x_dis = 15 * d
+      const tl_start = gsap.timeline({ paused: true })
+      tl_start
+        .set([ElemNameDot], {
+          opacity: 0,
+          x: '-200%',
+        })
+        .set([ElemNameUnderLine], {
+          backgroundSize: '0 6px',
+        })
+        .set([ElemBg], {
+          opacity: 0,
+        })
+        .set([ElemT1, ElemName, ElemDes, ElemBtn], {
+          opacity: 0,
+          x: `${x_dis}%`,
+        })
+      tl_start
+        .to(
+          [ElemBg],
+          {
+            opacity: 1,
+            duration: 1,
+            ease,
+          },
+          0
+        )
+        .to(
+          [ElemName, ElemT1, ElemDes, ElemBtn],
+          {
+            opacity: 1,
+            x: '0%',
+            ease,
+            stagger: {
+              ease: 'power1.in',
+              each: 0.1,
+            },
+          },
+          0
+        )
+        .to(
+          [ElemNameUnderLine],
+          {
+            backgroundSize: '100% 6px',
+            duration: 1,
+            ease: 'power3.inOut',
+          },
+          0
+        )
+        .to(
+          [ElemNameDot],
+          {
+            opacity: 1,
+            x: '0',
+            duration: 0.4,
+            ease,
+          },
+          0.5
+        )
+
+      return tl_start
+    },
+    //project切換-動畫end
+    onChanged_Project_AnimeEnd() {
+      const self = this as any
+      const ElemBg = self.$refs.galleryComp.querySelector('.project-bg')
+      const ElemT1 = self.$refs.galleryComp.querySelector('.t1Box')
+      const ElemName = self.$refs.galleryComp.querySelector('.nameBox')
+      const ElemDes = self.$refs.galleryComp.querySelector('.desBox')
+      const ElemBtn = self.$refs.galleryComp.querySelector('.btnBox .ds-button')
+      const duration = 0.25
+      const d = self.flickingProjectsDirection === DIRECTION.NEXT ? -1 : 1
+      const x_dis = 15 * d
+      const ease = 'power2.inOut'
+      const tl_start = gsap.timeline({ paused: true })
+      tl_start
+        .to(
+          [ElemBg],
+          {
+            opacity: 0,
+            duration,
+            ease,
+          },
+          0
+        )
+        .to(
+          [ElemT1, ElemName, ElemDes, ElemBtn],
+          {
+            opacity: 0,
+            x: `${x_dis}%`,
+            duration,
+            ease,
+          },
+          0
+        )
+
+      return tl_start
+    },
+    //banner進場-動畫start
+    banner_AnimeStart() {
+      const self = this as any
+      const ElemLogo = self.$refs.banner.querySelector('.logo')
+      const ElemP1 = self.$refs.banner.querySelector('.p-1')
+      const ElemP2 = self.$refs.banner.querySelector('.p-2')
+      const ElemP3 = self.$refs.banner.querySelector('.p-3')
+      const ElemP3UnderLine = ElemP3.querySelector('.ds-anime-title .text')
+      const ElemP3Dot = ElemP3.querySelector('.ds-anime-title .dot')
+      const ElemAgency = self.$refs.banner.querySelector('.agency')
+      const ElemTasteUsNow = self.$refs.banner.querySelector('.tasteUsNow')
+      const ElemLineScroll = self.$refs.banner.querySelector('.line-scroll')
+
+      const ease = 'power2.inOut'
+      const tl_start = gsap.timeline({ paused: true })
+      tl_start
+        .set([ElemAgency, ElemTasteUsNow, ElemLineScroll], {
+          opacity: 0,
+        })
+        .set([ElemTasteUsNow, ElemLineScroll], {
+          y: '20%',
+        })
+        .set([ElemLogo], {
+          opacity: 0,
+          y: '30%',
+        })
+        .set([ElemP1, ElemP2, ElemP3], {
+          opacity: 0,
+          x: '-10%',
+        })
+        .set([ElemP3Dot], {
+          opacity: 0,
+          x: '-200%',
+        })
+        .set([ElemP3UnderLine], {
+          backgroundSize: '0 8px',
+        })
+      tl_start
+        .to(
+          [ElemLogo],
+          {
+            y: '0',
+            opacity: 1,
+            duration: 1.5,
+            ease,
+          },
+          0
+        )
+        .to(
+          [ElemP1, ElemP2, ElemP3],
+          {
+            x: '0',
+            opacity: 1,
+            duration: 1.5,
+            ease,
+            stagger: {
+              ease: 'power1.in',
+              each: 0.1,
+            },
+          },
+          0.2
+        )
+        .to(
+          [ElemP3UnderLine],
+          {
+            backgroundSize: '100% 8px',
+            duration: 1.5,
+            ease: 'power3.inOut',
+          },
+          0.7
+        )
+        .to(
+          [ElemP3Dot],
+          {
+            opacity: 1,
+            x: '0',
+            duration: 0.8,
+            ease,
+          },
+          1.2
+        )
+        .to(
+          [ElemAgency, ElemTasteUsNow, ElemLineScroll],
+          {
+            opacity: 1,
+            y: '0',
+            duration: 1.5,
+            ease,
+          },
+          1.4
+        )
+
+      return tl_start
+    },
+    initScrollAnime() {
+      const self = this as any
+      const tl_banner = self.banner_AnimeScroll()
+      //tl_banner.seek(5)
+      window.LocomotiveScroll.on('scroll', (args) => {
+        // Get all current elements : args.currentElements
+        const banner = 'banner'
+        const aboutDigiSalad = 'aboutDigiSalad'
+        const speed = args.speed
+        if (typeof args.currentElements[banner] === 'object') {
+          const progress = args.currentElements[banner].progress
+          // ouput log example: 0.34
+          // gsap example : myGsapAnimation.progress(progress);
+          tl_banner.progress(progress).pause()
+        }
+        // if (typeof args.currentElements[aboutDigiSalad] === 'object') {
+        //   const progress = args.currentElements[aboutDigiSalad].progress
+        // }
+      })
+    },
+    banner_AnimeScroll() {
+      const self = this as any
+      const ElemBanner = self.$refs.banner
+      const ElemLogo = self.$refs.banner.querySelector('.logo')
+      const ElemP1 = self.$refs.banner.querySelector('.p-1')
+      const ElemP2 = self.$refs.banner.querySelector('.p-2')
+      const ElemP3 = self.$refs.banner.querySelector('.p-3')
+      const ElemP3UnderLine = ElemP3.querySelector('.ds-anime-title .text')
+      const ElemP3Dot = ElemP3.querySelector('.ds-anime-title .dot')
+      const ElemBgCover = self.$refs.banner.querySelector(
+        '.bg-cover__container'
+      )
+      const ElemTasteUsNow = self.$refs.banner.querySelector('.tasteUsNow')
+      const ElemLineScroll = self.$refs.banner.querySelector('.line-scroll')
+
+      const ease = 'power2.out'
+      const tl_start = gsap.timeline({ paused: true })
+      tl_start
+        .to(
+          [ElemLogo],
+          {
+            y: '100%',
+            opacity: 0,
+            duration: 1,
+            ease: 'none',
+          },
+          0
+        )
+        .to(
+          [ElemP1, ElemP2, ElemP3],
+          {
+            opacity: 0,
+            y: (index, target, targets) => {
+              //function-based value
+              return `${index * 100 + 400}%`
+            },
+            duration: 1.5,
+            ease: 'none',
+          },
+          0
+        )
+        .to(
+          [ElemP3UnderLine],
+          {
+            backgroundSize: '0% 8px',
+            duration: 1.5,
+            ease: 'none',
+          },
+          0
+        )
+        .to(
+          [ElemP3Dot],
+          {
+            opacity: 1,
+            x: '-200%',
+            duration: 0.8,
+            ease: 'none',
+          },
+          0
+        )
+        .to(
+          [ElemBgCover],
+          {
+            borderBottomLeftRadius: '50px',
+            borderBottomRightRadius: '50px',
+            scale: 0.9,
+            duration: 1.5,
+            ease,
+          },
+          0.5
+        )
+
+      return tl_start
+    },
+    scrollToTaste() {
+      const self = this as any
+      const target = document.querySelector('section.aboutDigiSalad')
+      window.LocomotiveScroll.scrollTo(target)
     },
   },
 })

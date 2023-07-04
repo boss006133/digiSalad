@@ -36,6 +36,30 @@
       //stroke: toRGBA(var(--theme_rgbStr-light3));
     }
   }
+  .Symbols {
+    &,
+    .c_01 {
+      transition: transform 0.15s ease, fill 0.25s ease;
+      transform-origin: center;
+    }
+  }
+  &:hover {
+    .#{$uaPc} & {
+      .Symbols {
+        .c_01 {
+          fill: darken($themeColor1, 5%);
+        }
+      }
+    }
+  }
+  &:active {
+    .Symbols {
+      transform: scale(0.9);
+      .c_01 {
+        fill: lighten($themeColor1, 5%) !important;
+      }
+    }
+  }
 }
 .flicking-arrow-prev {
   right: calc(100% + 50px);

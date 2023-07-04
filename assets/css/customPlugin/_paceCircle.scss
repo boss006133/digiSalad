@@ -1,5 +1,4 @@
 /*Loading Style*/
-$loading__bgColor: #fff2c9;
 :root {
   --animate-duration: 2s;
   --animate-delay: 1s;
@@ -39,7 +38,7 @@ body {
     width: 100%;
     height: 100%;
     z-index: 0;
-    background-color: #fff;
+    background-color: $themeColor1;
   }
   .loader__rim {
     $size_pc: 100px;
@@ -114,14 +113,14 @@ body {
       //   background: url(@/assets/image/icon/ic_pants.svg) no-repeat center;
       //   background-size: 100%;
       // }
-      &-5 {
-        background: url(@/assets/image/logo/logo.svg) no-repeat center;
-        background-size: contain;
-        width: 65%;
-        @include mediaMax('media-mb_04') {
-          width: 65%;
-        }
-      }
+      // &-5 {
+      //   background: url(@/assets/image/logo/logo.svg) no-repeat center;
+      //   background-size: contain;
+      //   width: 65%;
+      //   @include mediaMax('media-mb_04') {
+      //     width: 65%;
+      //   }
+      // }
       // &-6 {
       //   background: url(@/assets/image/icon/ic_underwear.svg) no-repeat center;
       //   background-size: 100%;

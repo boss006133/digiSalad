@@ -7,11 +7,15 @@
       min-height: calc(var(--vh) * 100);
       position: relative;
       > .content {
+        overflow: hidden;
         position: relative;
         z-index: 3;
         min-height: calc(var(--vh) * 100);
         display: flex;
         align-items: center;
+        .p-3 {
+          margin-left: -10px;
+        }
       }
       .main-content {
         padding: 0% 15.5% 0;
@@ -32,6 +36,7 @@
         left: 50%;
         transform: translate(-50%, 0);
         .tasteUsNow {
+          cursor: pointer;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -119,6 +124,15 @@
           }
         }
       }
+      .bg-cover__container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
       .default-bg {
         position: absolute;
         left: 0;
@@ -168,6 +182,13 @@
         // height: 100%;
         transform: translate(-50%, 0);
         pointer-events: none;
+      }
+      .ds-anime-title {
+        .text {
+          @include textUnderLine(8px);
+          padding-right: 0;
+          background-position: left bottom 10px;
+        }
       }
     }
     &.aboutDigiSalad {
@@ -253,7 +274,6 @@
         margin-top: 30px;
       }
     }
-
     &.awards {
       position: relative;
       margin-top: 70px;
@@ -519,7 +539,7 @@
     &.projects {
       position: relative;
       .banner__container {
-        padding: 13% 0 18%;
+        padding: 13% 0 11%;
         position: relative;
         z-index: 1;
         max-width: 1040px;
@@ -527,6 +547,7 @@
       }
       .banner__wrap {
         display: flex;
+        flex-wrap: wrap;
         position: relative;
         .imgBox {
           position: relative;
@@ -534,10 +555,13 @@
           flex-shrink: 0;
         }
         .contentBox {
+          flex: 1;
           color: #fff;
           padding-left: 65px;
           padding-top: 60px;
+          padding-bottom: 80px;
           .t1Box {
+            padding-left: 10px;
             @include fontSize(16px);
             font-weight: 700;
             line-height: normal;
@@ -560,11 +584,15 @@
           }
         }
         .btnBox {
-          position: absolute;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          margin-top: -4%;
           z-index: 3;
-          left: 46%;
-          bottom: 0;
-          transform: translate(-50%, 64%);
+          // left: 46%;
+          // bottom: 0;
+          // transform: translate(-50%, 64%);
           .ds-button {
             padding-top: 58px;
             padding-bottom: 58px;
@@ -642,6 +670,12 @@
           filter: blur(10px);
         }
       }
+      .ds-anime-title {
+        .dot {
+          left: calc(100% + 15px);
+          bottom: 15px;
+        }
+      }
     }
   }
   .sec-title-warp {
@@ -674,6 +708,15 @@
     > .wave {
       height: 13px;
       width: 100%;
+    }
+  }
+  .ds-anime-title {
+    .text {
+      position: relative;
+      @include textUnderLine();
+    }
+    .dot {
+      @include dsDot();
     }
   }
   .sec-content {
@@ -746,15 +789,17 @@
     font-weight: 700;
     line-height: normal;
     letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: solid $themeColor6 underline;
-    text-underline-offset: -5px;
-    text-decoration-thickness: 50%;
-    text-decoration-skip-ink: none;
-    transition: all 0.25s ease;
+    .text {
+      @include textUnderLine(calc(40%), $themeColor6);
+      padding: 0;
+      background-position: left bottom 2px;
+      transition: all 0.25s ease;
+    }
     &:hover {
-      text-underline-offset: -20px;
-      text-decoration-thickness: 150%;
+      .text {
+        background-position: left bottom 0px;
+        background-size: auto 100%;
+      }
     }
   }
   #flicking-projects {

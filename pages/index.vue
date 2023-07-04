@@ -1,7 +1,13 @@
 <template>
   <div class="page-home">
     <!-- banner -->
-    <section class="banner">
+    <section
+      class="banner"
+      ref="banner"
+      data-scroll
+      data-scroll-id="banner"
+      data-scroll-offset="100%"
+    >
       <div class="content">
         <div class="main-content">
           <div class="logo">
@@ -15,13 +21,19 @@
           <div class="slogan">
             <p class="p-1">WE CREATE</p>
             <p class="p-2">AMAZING</p>
-            <p class="p-3">DIGITAL EXPERIENCES</p>
+            <p class="p-3">
+              <span class="ds-anime-title">
+                <span class="text"
+                  >DIGITAL EXPERIENCES<span class="dot"></span
+                ></span>
+              </span>
+            </p>
           </div>
         </div>
       </div>
       <div class="agency-wrap"><div class="agency">DIGITAL AGENCY</div></div>
       <div class="tasteUsNow-wrap">
-        <div class="tasteUsNow">
+        <div class="tasteUsNow" @click="scrollToTaste">
           <div class="plate"></div>
           <div class="text">TASTE US NOW!</div>
         </div>
@@ -29,13 +41,15 @@
       <div class="line-scroll">
         <span class="line"></span>
       </div>
-      <div class="default-bg"></div>
-      <div class="video-wrap">
-        <div :id="`${bannerVideoId}`" class="brand-video"></div>
+      <div class="bg-cover__container">
+        <div class="default-bg" data-scroll data-scroll-speed="-8"></div>
+        <div class="video-wrap" data-scroll data-scroll-speed="-8">
+          <div :id="`${bannerVideoId}`" class="brand-video"></div>
+        </div>
       </div>
     </section>
     <!-- ABOUT DIGISALAD -->
-    <section class="aboutDigiSalad">
+    <section class="aboutDigiSalad" data-scroll data-scroll-id="aboutDigiSalad">
       <div class="sec-title-warp">
         <div class="sec-title">
           <div class="text">ABOUT DIGISALAD<span class="dot"></span></div>
@@ -245,7 +259,7 @@
       </div>
     </section>
     <!-- PROJECTS -->
-    <section class="projects">
+    <section class="projects" ref="galleryComp">
       <div class="banner__container">
         <div id="projects-slideContainer" class="banner__wrap">
           <div class="imgBox">
@@ -277,10 +291,12 @@
             </div>
           </div>
           <div class="contentBox">
-            <div class="t1Box">HIGHLIGHTED SHOWCASE</div>
+            <div class="t1Box">{{ projectsObject.t1 }}</div>
             <div class="nameBox">
               <div class="ds-anime-title">
-                <span class="text">LP CLUB MOBILE APP</span>
+                <span class="text"
+                  >{{ projectsObject.name }}<span class="dot"></span
+                ></span>
               </div>
             </div>
             <div class="desBox">
@@ -302,10 +318,14 @@
           </div>
           <div class="paginationBox">
             <div class="current">
-              <span class="text">01</span>
+              <span class="text">{{
+                String(flickingProjectsCurrent + 1).padStart(2, '0')
+              }}</span>
             </div>
             <div class="total">
-              <span class="text">04</span>
+              <span class="text">{{
+                String(projects.length).padStart(2, '0')
+              }}</span>
             </div>
             <span class="divider"></span>
           </div>
@@ -322,7 +342,7 @@
       <div class="bg-cover">
         <div
           class="project-bg"
-          :style="`background-image: url('/image/project-1.png');`"
+          :style="`background-image: url('${projectsObject.bannerSrc}');`"
         ></div>
       </div>
     </section>
