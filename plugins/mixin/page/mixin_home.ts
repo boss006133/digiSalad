@@ -175,7 +175,6 @@ export default Vue.extend({
           }, 100)
         }
       },
-
       immediate: true,
     },
   },

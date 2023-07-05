@@ -63,11 +63,13 @@ export default {
             if (self.isCrawler || self.isServerApiError || sS_loadLanding) {
               self[actionIndex.SET_PAGELOADDONE]()
             } else {
-              const openAnimeTL = self.landingAnime()
-              openAnimeTL.play().then(() => {
-                self[actionIndex.SET_PAGELOADDONE]()
-                sessionStorage.setItem(st.st_loadLanding, 'Y')
-              })
+              // const openAnimeTL = self.landingAnime()
+              // openAnimeTL.play().then(() => {
+              //   self[actionIndex.SET_PAGELOADDONE]()
+              //   sessionStorage.setItem(st.st_loadLanding, 'Y')
+              // })
+              self[actionIndex.SET_PAGELOADDONE]()
+              sessionStorage.setItem(st.st_loadLanding, 'Y')
             }
 
             // const openAnimeTL = self.landingAnime()
