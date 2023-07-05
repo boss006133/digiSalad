@@ -27,7 +27,7 @@ export default {
     return {
       serverPending: true,
       bodyCoverFadeOute_duration: 1200,
-      bodyCoverFadeOute_delay: 400,
+      bodyCoverFadeOute_delay: 300,
       page_load_animation_delay: 0,
       loadingtext: 0,
       loadingtextEnd: false,

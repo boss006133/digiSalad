@@ -1,4 +1,5 @@
 .nav-menu {
+  $underLineThick: 8px;
   position: fixed;
   left: 0;
   top: 0;
@@ -16,6 +17,14 @@
     overflow-x: visible;
     overflow-y: auto;
     padding-top: 92px;
+    @include mediaMax('media-pc_04') {
+      padding: 0 100px;
+      padding-top: 70px;
+    }
+    @include mediaMax('media-mb_01') {
+      padding: 0 30px;
+      padding-top: 70px;
+    }
   }
   .nav-menu__container {
     position: absolute;
@@ -28,13 +37,39 @@
       position: relative;
     }
   }
+  > .logo {
+    position: absolute;
+    left: 60px;
+    top: 40px;
+    z-index: 1;
+    width: 140px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s cubic-bezier(0.52, 0.36, 0.12, 0.94);
+    @include mediaMax('media-pc_04') {
+      width: 80px;
+      left: 30px;
+      top: 12px;
+    }
+    @include mediaMax('media-mb_02') {
+      left: 20px;
+    }
+    #{$navShowClass} & {
+      opacity: 1;
+      transform: none;
+    }
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
   > .bg {
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
     right: 0;
-    z-index: 0;
+    z-index: 1;
     opacity: 0;
     background: linear-gradient(
       180deg,
@@ -44,14 +79,15 @@
     );
     background-size: 100% 200%;
     background-position: 0% 0%;
-    transition: opacity var(--NAV_MENU__closeDuration)
+    transition: opacity var(--NAV_MENU__openDuration)
         cubic-bezier(0.52, 0.36, 0.12, 0.94),
-      background-position var(--NAV_MENU__closeDuration)
+      background-position var(--NAV_MENU__openDuration)
         cubic-bezier(0.52, 0.36, 0.12, 0.94) 0.1s;
     transform-origin: 50% 100%;
     #{$navShowClass} & {
       background-position: 0% 100%;
       opacity: 0.8999999761581421;
+      transition-duration: var(--NAV_MENU__closeDuration);
     }
   }
   .btn-close {
@@ -66,18 +102,56 @@
     #{$navShowClass} & {
       opacity: 1;
     }
+    @include mediaMax('media-pc_04') {
+      top: 18px;
+      right: 31px;
+    }
+    @include mediaMax('media-mb_02') {
+      right: 21px;
+    }
   }
   .waterfall {
     margin-left: -40px;
+    @include mediaMax('media-mb_01') {
+      margin-left: -30px;
+    }
+    @include mediaMax('media-mb_03') {
+      margin-left: 0;
+    }
   }
   .Waterfall-item {
-    width: 33.3333333%;
+    width: 33.333333%;
     padding-left: 40px;
     margin-bottom: 40px;
+    // &.careers,
+    // &.insights {
+    //   width: 28%;
+    // }
+    @include mediaMax('media-pc_04') {
+      width: 50%;
+    }
+    @include mediaMax('media-mb_01') {
+      padding-left: 30px;
+      margin-bottom: 30px;
+    }
+    @include mediaMax('media-mb_03') {
+      width: 100%;
+      padding-left: 0;
+      margin-bottom: 20px;
+    }
+    &:nth-child(1),
+    &:nth-child(3) {
+      margin-top: 5%;
+    }
+    &:nth-child(3) {
+      @include mediaMax('media-pc_04') {
+        margin-top: 0%;
+      }
+    }
     .waterFallItem {
       opacity: 0;
       transform: translateY(100px);
-      transition: all 0.3s ease;
+      transition: all 0.5s cubic-bezier(0.52, 0.36, 0.12, 0.94);
       #{$navShowClass} & {
         opacity: 1;
         transform: none;
@@ -90,21 +164,30 @@
         }
       }
     }
-    &.careers,
-    &.insights {
-      //width: 30%;
-      //flex: 1 1 30%;
-    }
   }
   .waterFallItem {
     border-radius: 30px;
-    padding: 40px 38px;
+    padding: 40px 30px 40px 34px;
     color: #fff;
     overflow: hidden;
     position: relative;
-    .bg {
+    display: flex;
+    align-items: flex-end;
+    @include mediaMax('media-mb_03') {
+      border-radius: 26px;
+      padding: 40px 22px 40px 22px;
+    }
+    .bg-color {
       position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
       z-index: 0;
+    }
+    .bg-img {
+      position: absolute;
+      z-index: 1;
       left: 0;
       top: 0;
       right: 0;
@@ -112,11 +195,15 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
+      transition: all 0.5s cubic-bezier(0.52, 0.36, 0.12, 0.94);
     }
     .content__container {
       position: relative;
       z-index: 2;
       display: flex;
+      @include mediaMax('media-mb_03') {
+        align-items: center;
+      }
       .leftBox {
       }
       .rightBox {
@@ -127,63 +214,163 @@
         font-weight: 400;
         line-height: normal;
         letter-spacing: 1.8px;
+        @include mediaMax('media-mb_03') {
+          @include fontSize(14px);
+        }
       }
       .nameBox {
         margin-top: 4px;
         .name {
-          $underLineThick: 6px;
+          position: relative;
           @include fontSize(32px);
           font-weight: 700;
           line-height: normal;
           letter-spacing: 3.636px;
+          @include mediaMax('media-mb_03') {
+            @include fontSize(26px);
+            letter-spacing: 2.636px;
+          }
           .text {
+            position: relative;
             @include textUnderLine($underLineThick, $themeColor6);
             padding: 0;
             transition: all 0.25s ease;
             background-size: 0% $underLineThick;
+            background-position: left bottom 9px !important;
+          }
+          .dot {
+            @include dsDot();
+          }
+        }
+      }
+    }
+    &.careers,
+    &.services,
+    &.insights,
+    &.contact {
+      .content__container {
+        .rightBox {
+          padding-left: 0;
+        }
+      }
+    }
+    &.careers,
+    &.services,
+    &.insights {
+      .content__container {
+        flex-direction: column;
+        @include mediaMax('media-mb_03') {
+          flex-direction: row;
+        }
+        .rightBox {
+          padding-top: 18px;
+          @include mediaMax('media-mb_03') {
+            padding-top: 0;
+            padding-left: 17px;
           }
         }
       }
     }
     &.about {
-      background-color: $themeColor1;
-      .bg {
+      min-height: calc(100vw * 0.135);
+      @include mediaMin('media-mb_03') {
+        padding-bottom: 14%;
+      }
+      .bg-color {
+        background-color: $themeColor1;
+      }
+
+      .bg-img {
         background-image: url('/image/nav/bg-nav-about.png');
       }
     }
     &.careers {
-      background-color: $themeColor7;
-      .bg {
+      min-height: calc(100vw * 0.28);
+      .bg-color {
+        background-color: $themeColor7;
+      }
+      .bg-img {
+        background-size: contain;
         background-image: url('/image/nav/bg-nav-careers.png');
+        @include mediaMax('media-mb_03') {
+          background-position: 80% 50%;
+        }
+      }
+      .content__container {
+        .iconBox {
+          @include mediaMax('media-mb_03') {
+            width: 60px;
+          }
+        }
+        .nameBox {
+          .name {
+            .text {
+              @include textUnderLine($underLineThick, $themeColor1);
+              padding: 0;
+              background-size: 0% $underLineThick;
+            }
+          }
+        }
       }
     }
     &.services {
-      background-color: $themeColor5;
-      .bg {
+      min-height: calc(100vw * 0.21);
+      .bg-color {
+        background-color: $themeColor5;
+      }
+      .bg-img {
         background-image: url('/image/nav/bg-nav-services.png');
       }
     }
     &.works {
-      background-color: $themeColor2;
-      .bg {
+      min-height: calc(100vw * 0.21);
+      @include mediaMin('media-mb_03') {
+        padding-bottom: 14%;
+      }
+      .bg-color {
+        background-color: $themeColor2;
+        opacity: 0.8;
+      }
+      .bg-img {
         background-image: url('/image/nav/bg-nav-works.png');
+      }
+      .content__container {
+        .iconBox {
+          @include mediaMax('media-mb_03') {
+            width: 60px;
+          }
+        }
+        .nameBox {
+          .name {
+            .dot {
+              @include dsDot();
+              background-color: $themeColor1;
+            }
+          }
+        }
       }
     }
     &.insights {
-      background-color: $themeColor8;
-      .bg {
+      min-height: calc(100vw * 0.185);
+      .bg-color {
+        background-color: $themeColor8;
+      }
+      .bg-img {
+        background-size: contain;
         background-image: url('/image/nav/bg-nav-insights.png');
       }
     }
     &.contact {
-      background-color: #fff;
+      min-height: calc(100vw * 0.135);
+      align-items: center;
+      .bg-color {
+        background-color: #fff;
+      }
       .content__container {
         .leftBox {
           display: none;
         }
-        .rightBox {
-          padding-left: 0;
-        }
+
         .subTitleBox {
           color: $themeColor3;
         }
@@ -201,10 +388,13 @@
             .name {
               background-position: 100% 0;
               .text {
-                background-size: 100% 6px;
+                background-size: 100% $underLineThick;
               }
             }
           }
+        }
+        .bg-img {
+          transform: scale(1.12);
         }
       }
     }

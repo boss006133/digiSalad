@@ -7,7 +7,12 @@
   width: 56px;
   min-width: 26px;
   z-index: 2;
-
+  @include mediaMax('media-pc_04') {
+    width: 34px;
+  }
+  @include mediaMax('media-mb_01') {
+    top: calc(100vw * 0.28);
+  }
   > i {
     position: absolute;
     left: 0;
@@ -63,7 +68,23 @@
 }
 .flicking-arrow-prev {
   right: calc(100% + 50px);
+  @include mediaMax('media-pc_04') {
+    left: 20px;
+    right: auto;
+  }
+  @include mediaMax('media-mb_01') {
+    left: 0px;
+    margin-left: -17px;
+  }
 }
 .flicking-arrow-next {
   left: calc(100% + 50px);
+  @include mediaMax('media-pc_04') {
+    left: auto;
+    right: 20px;
+  }
+  @include mediaMax('media-mb_01') {
+    right: 0px;
+    margin-right: -17px;
+  }
 }

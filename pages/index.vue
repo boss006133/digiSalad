@@ -98,12 +98,20 @@
         <div class="awards-board">
           <div class="contentBox">
             <div class="sec-title-warp">
-              <div class="sec-title">
+              <div
+                class="sec-title"
+                data-scroll
+                :data-scroll-call="LOCO_FADEUP"
+              >
                 <div class="text">AWARDS<span class="dot"></span></div>
                 <div class="wave"></div>
               </div>
             </div>
-            <div class="sec-content">
+            <div
+              class="sec-content"
+              data-scroll
+              :data-scroll-call="LOCO_FADEUP"
+            >
               <p>
                 Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras
                 ullamcorper bibendum bibendum. Duis tincidunt urna non pretium
@@ -114,7 +122,13 @@
             </div>
           </div>
           <div class="awardList">
-            <div class="item" v-for="(item, index) in 4" :key="index">
+            <div
+              class="item"
+              v-for="(item, index) in 4"
+              :key="index"
+              data-scroll
+              :data-scroll-call="LOCO_FADEUP"
+            >
               <img
                 src="/image/award-1.png"
                 alt="Asia Smart App Awards"

@@ -18,6 +18,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mediaMax('media-pc_04') {
+      height: 60px;
+      padding: 5px 30px 5px 30px;
+    }
+    @include mediaMax('media-mb_02') {
+      padding: 5px 20px 5px 20px;
+    }
   }
   .ob_header__right {
     display: flex;
@@ -25,6 +32,12 @@ header {
   }
   .nav-open__container {
     padding-left: 44px;
+    @include mediaMax('media-pc_04') {
+      padding-left: 25px;
+    }
+    @include mediaMax('media-mb_02') {
+      padding-left: 20px;
+    }
   }
   .btn_startProject {
     $underLineThick: 6px;
@@ -44,6 +57,11 @@ header {
     letter-spacing: 1.143px;
     padding: 10px 16px;
     transition: all 0.5s ease;
+    @include mediaMax('media-pc_04') {
+      @include fontSize(12px);
+      letter-spacing: 1px;
+      padding: 5px 16px;
+    }
     .text {
       @include textUnderLine($underLineThick, $themeColor6);
       padding: 0;
@@ -59,9 +77,26 @@ header {
         }
       }
     }
+    &:active {
+      .#{$uaMobile} & {
+        background-position: 100% 0;
+        .text {
+          background-size: 100% $underLineThick;
+        }
+      }
+    }
   }
   .logo {
     opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.5s ease;
+    @include mediaMax('media-pc_04') {
+      width: 80px;
+    }
+    #{$headerStickyClass} & {
+      opacity: 1;
+      transform: none;
+    }
   }
   .bg-cover {
     position: absolute;
@@ -71,9 +106,23 @@ header {
     bottom: 0;
     background-color: #fff;
     opacity: 0;
+    transform: scaleY(1.2);
+    transform-origin: 50% 0;
     z-index: 0;
+    transition: all 0.5s ease-out;
+    #{$headerStickyClass} & {
+      opacity: 1;
+      transform: none;
+    }
   }
   .button-mini-nav {
     cursor: pointer;
+  }
+  .icon_navOutlined {
+    .p_01 {
+      #{$headerStickyClass} & {
+        fill: $themeColor5;
+      }
+    }
   }
 }

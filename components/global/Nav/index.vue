@@ -12,12 +12,15 @@
               to="/"
               class="waterFallItem"
               :class="[item.type]"
-              :style="item.style"
               :index="item.index"
             >
               <div class="content__container">
-                <div class="leftBox">
+                <div class="leftBox" v-if="item.icon">
                   <div class="iconBox">
+                    <img
+                      :src="`/image/nav/icon-nav-${item.type}.svg`"
+                      :alt="item.type"
+                    />
                     <i :class="[`icon-${item.type}`]"></i>
                   </div>
                 </div>
@@ -25,20 +28,26 @@
                   <div class="subTitleBox">{{ item.subTitle }}</div>
                   <div class="nameBox">
                     <div class="name">
-                      <span class="text">{{ item.name }}</span>
+                      <span class="text"
+                        >{{ item.name }}<span class="dot"></span
+                      ></span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="bg"></div>
+              <div class="bg-img"></div>
+              <div class="bg-color"></div>
             </nuxt-link>
           </WaterfallItem>
         </Waterfall>
       </div>
     </div>
     <div class="bg"></div>
+    <div class="logo">
+      <img src="/image/logo.svg" alt="DigiSalad" width="140" height="62" />
+    </div>
     <div class="btn-close" @click="$Nav.close()">
-      <NavCloseOutlined></NavCloseOutlined>
+      <NavCloseOutlined :size="isMedia.pc_04 ? 20 : 26"></NavCloseOutlined>
     </div>
   </div>
 </template>
@@ -46,72 +55,45 @@
 import { gsap } from 'gsap'
 import { NavCloseOutlined } from '@/components/icons-ds'
 import { Waterfall, WaterfallItem } from 'vue2-waterfall'
-
 import { mapState, mapActions } from 'pinia'
 import usePopupStore from '@/store/popup'
-var ItemNav = (function () {
-  function generateItems() {
-    return [
-      {
-        index: 0,
-        id: '0',
-        width: 200,
-        height: 300,
-        type: 'about',
-        subTitle: 'EMPOWERING BRANDS',
-        name: 'ABOUT US',
-      },
-      {
-        index: 1,
-        id: '1',
-        width: 200,
-        height: 300,
-        type: 'careers',
-        subTitle: 'BE COOL WITH US',
-        name: 'CAREERS',
-      },
-      {
-        index: 2,
-        id: '2',
-        width: 200,
-        height: 300,
-        type: 'services',
-        subTitle: 'AREAS OF EXPERTISE',
-        name: 'SERVICES',
-      },
-      {
-        index: 3,
-        id: '3',
-        width: 200,
-        height: 300,
-        type: 'works',
-        subTitle: 'CASE STUDIES',
-        name: 'WORKS',
-      },
-      {
-        index: 4,
-        id: '4',
-        width: 200,
-        height: 300,
-        type: 'insights',
-        subTitle: 'OUR STRATEGIES',
-        name: 'INSIGHTS',
-      },
-      {
-        index: 5,
-        id: '5',
-        width: 200,
-        height: 300,
-        type: 'contact',
-        subTitle: 'START YOUR JOURNEY WITH US',
-        name: 'CONTACT',
-      },
-    ]
-  }
-  return {
-    get: generateItems,
-  }
-})()
+const itemAbout = {
+  icon: true,
+  type: 'about',
+  subTitle: 'EMPOWERING BRANDS',
+  name: 'ABOUT US',
+}
+const itemCareers = {
+  icon: true,
+  type: 'careers',
+  subTitle: 'BE COOL WITH US',
+  name: 'CAREERS',
+}
+const itemServices = {
+  icon: true,
+  type: 'services',
+  subTitle: 'AREAS OF EXPERTISE',
+  name: 'SERVICES',
+}
+const itemWorks = {
+  icon: true,
+  type: 'works',
+  subTitle: 'CASE STUDIES',
+  name: 'WORKS',
+}
+const itemInsights = {
+  icon: true,
+  type: 'insights',
+  subTitle: 'OUR STRATEGIES',
+  name: 'INSIGHTS',
+}
+const itemContact = {
+  icon: false,
+  type: 'contact',
+  subTitle: 'START YOUR JOURNEY WITH US',
+  name: 'CONTACT',
+}
+
 export default {
   name: 'PopupNav',
   components: {
@@ -126,9 +108,73 @@ export default {
       classActive: '--show',
       variablesName: '--NAV_MENU',
       open: false,
-      closeDuration: 550,
+      openDuration: 450,
+      closeDuration: 650,
       closeTimer: null,
-      items: ItemNav.get(),
+      items_pc: [
+        {
+          index: 0,
+          id: '0',
+          ...itemAbout,
+        },
+        {
+          index: 1,
+          id: '1',
+          ...itemCareers,
+        },
+        {
+          index: 2,
+          id: '2',
+          ...itemServices,
+        },
+        {
+          index: 3,
+          id: '3',
+          ...itemWorks,
+        },
+        {
+          index: 4,
+          id: '4',
+          ...itemContact,
+        },
+        {
+          index: 5,
+          id: '5',
+          ...itemInsights,
+        },
+      ],
+      items_mb: [
+        {
+          index: 0,
+          id: '0',
+          ...itemAbout,
+        },
+        {
+          index: 1,
+          id: '1',
+          ...itemCareers,
+        },
+        {
+          index: 2,
+          id: '2',
+          ...itemServices,
+        },
+        {
+          index: 3,
+          id: '3',
+          ...itemWorks,
+        },
+        {
+          index: 4,
+          id: '4',
+          ...itemInsights,
+        },
+        {
+          index: 5,
+          id: '5',
+          ...itemContact,
+        },
+      ],
       options: {},
     }
   },
@@ -139,6 +185,10 @@ export default {
     activeClass() {
       const self = this as any
       return `${self.classDefault}${self.classActive}`
+    },
+    items() {
+      const self = this as any
+      return self.isMedia.mb_00 ? self.items_mb : self.items_pc
     },
   },
   watch: {
@@ -172,6 +222,7 @@ export default {
   mounted() {
     const self = this as any
     self.$setHtmlCssVar({
+      [`${self.variablesName}__openDuration`]: `${self.openDuration / 1000}s`,
       [`${self.variablesName}__closeDuration`]: `${self.closeDuration / 1000}s`,
     })
   },

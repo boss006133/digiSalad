@@ -22,6 +22,23 @@
         margin-top: -7%;
         transform-style: preserve-3d;
         perspective: 300px;
+        @include mediaMax('media-pc_04') {
+          padding: 0% 12% 0;
+        }
+        @include mediaMax('media-mb_02') {
+          padding: 0% 10% 0;
+          margin: 0 auto;
+          margin-top: -7%;
+        }
+        .logo {
+          @include mediaMax('media-pc_04') {
+            width: 150px;
+          }
+          @include mediaMax('media-mb_02') {
+            width: 130px;
+            margin: 0 auto;
+          }
+        }
         .slogan {
           margin-top: 34px;
           color: #fff;
@@ -31,6 +48,23 @@
           letter-spacing: 9.167px;
           transform-style: preserve-3d;
           perspective: 300px;
+
+          @include mediaMax('media-pc_04') {
+            @include fontSize(26px);
+            line-height: 50px;
+            letter-spacing: 8.167px;
+          }
+          @include mediaMax('media-mb_02') {
+            margin-top: 24px;
+            @include fontSize(20px);
+            line-height: 40px;
+            letter-spacing: 7.167px;
+            text-align: center;
+          }
+          @include mediaMax('media-mb_03') {
+            @include fontSize(18px);
+            letter-spacing: 5.167px;
+          }
         }
       }
       .tasteUsNow-wrap {
@@ -39,6 +73,9 @@
         bottom: 75px;
         left: 50%;
         transform: translate(-50%, 0);
+        @include mediaMax('media-pc_04') {
+          bottom: 40px;
+        }
         .tasteUsNow {
           cursor: pointer;
           display: flex;
@@ -51,6 +88,9 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
+            @include mediaMax('media-pc_04') {
+              width: 44px;
+            }
             &:after {
               content: '';
               display: block;
@@ -65,6 +105,11 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-top: 11px;
+            @include mediaMax('media-pc_04') {
+              @include fontSize(12px);
+              margin-top: 8px;
+              letter-spacing: 1px;
+            }
           }
         }
       }
@@ -81,7 +126,13 @@
         letter-spacing: 2.222px;
         transform: rotate(-90deg) translate(-50%, 0%);
         transform-origin: 0 0;
-
+        @include mediaMax('media-pc_04') {
+          @include fontSize(12px);
+          left: #{math.div(30px, $banner_w_pc) * 100%};
+        }
+        @include mediaMax('media-mb_02') {
+          display: none;
+        }
         .agency {
           display: flex;
           align-items: center;
@@ -101,11 +152,17 @@
         left: 50%;
         transform: translate(-50%, 0);
         mix-blend-mode: plus-lighter;
+        @include mediaMax('media-pc_04') {
+          bottom: -50px;
+        }
         .line {
           overflow: hidden;
           display: block;
           width: 1px;
           height: 130px;
+          @include mediaMax('media-pc_04') {
+            height: 80px;
+          }
           &:before,
           &:after {
             content: '';
@@ -193,11 +250,17 @@
           @include textUnderLine(8px);
           padding-right: 0;
           background-position: left bottom 10px;
+          @include mediaMax('media-mb_02') {
+            background-position: left bottom 3px;
+          }
         }
       }
     }
     &.aboutDigiSalad {
       padding-top: 125px;
+      @include mediaMax('media-pc_04') {
+        padding-top: 85px;
+      }
       .sec-title {
         > .wave {
           display: block;
@@ -206,6 +269,11 @@
           background-position: 0px 0, right 1px center;
           width: 369px;
           margin-left: 20px;
+          @include mediaMax('media-pc_04') {
+            width: 243px;
+            background-position: 0px 0, right 0px center;
+            margin-left: 0px;
+          }
         }
       }
       .video-wrap {
@@ -213,6 +281,9 @@
         max-width: 960px;
         margin: 0 auto;
         margin-top: 71px;
+        @include mediaMax('media-pc_04') {
+          margin-top: 50px;
+        }
         &:after {
           content: '';
           display: block;
@@ -243,6 +314,12 @@
             transform: translate(-50%, -50%);
             width: 11.77%;
             display: flex;
+            @include mediaMax('media-pc_04') {
+              width: 9%;
+            }
+            @include mediaMax('media-mb_02') {
+              width: 15%;
+            }
             &:after {
               content: '';
               display: block;
@@ -286,6 +363,9 @@
       justify-content: flex-end;
       .sec-title-warp {
         justify-content: flex-start;
+        @include mediaMax('media-pc_04') {
+          justify-content: center;
+        }
       }
       .sec-title {
         > .text > .dot {
@@ -297,12 +377,21 @@
           background-repeat: no-repeat;
           width: 191px;
           margin-left: 0px;
+          @include mediaMax('media-pc_04') {
+            width: 150px;
+          }
         }
       }
       .awards-board-wrap {
         position: relative;
         z-index: 1;
         margin-left: 98px;
+        @include mediaMax('media-pc_04') {
+          margin-left: 60px;
+        }
+        @include mediaMax('media-mb_02') {
+          margin-left: 20px;
+        }
       }
       .awards-board {
         background-color: #fff;
@@ -310,9 +399,25 @@
         border-top-right-radius: 0;
         padding: 65px 69px;
         display: flex;
+        @include mediaMax('media-pc_04') {
+          padding: 40px 45px;
+          flex-direction: column;
+          border-radius: 36px;
+          border-top-right-radius: 0;
+        }
+        @include mediaMax('media-mb_02') {
+          padding: 30px 25px;
+          border-radius: 26px;
+          border-top-right-radius: 0;
+        }
         > .contentBox {
           width: 33.333333%;
           min-width: 416px;
+          @include mediaMax('media-pc_04') {
+            width: 100%;
+            min-width: 0;
+            margin-bottom: 15px;
+          }
         }
         > .awardList {
           flex: 1;
@@ -322,16 +427,28 @@
           align-items: center;
           margin-left: -37px;
           margin-top: -10px;
+          @include mediaMax('media-pc_04') {
+            padding-left: 0;
+            margin-left: -14px;
+            justify-content: center;
+          }
           > * {
             max-width: 50%;
             padding-left: 37px;
             padding-top: 10px;
+            @include mediaMax('media-pc_04') {
+              padding-left: 14px;
+            }
           }
         }
         .sec-content {
           margin-top: 30px;
           max-width: none;
           text-align: left;
+          @include mediaMax('media-pc_04') {
+            margin-top: 20px;
+            text-align: center;
+          }
         }
       }
       .half-bg {
@@ -343,12 +460,28 @@
         bottom: 0;
         background-color: $themeColor1;
         border-top-left-radius: 50px;
+        @include mediaMax('media-pc_04') {
+          border-top-left-radius: 36px;
+        }
+        @include mediaMax('media-mb_02') {
+          border-top-left-radius: 26px;
+        }
       }
     }
     &.ourIngradients {
       padding-top: 104px;
       padding-bottom: 129px;
       background-color: $themeColor1;
+      @include mediaMax('media-pc_04') {
+        padding-top: 66px;
+        padding-bottom: 80px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      @include mediaMax('media-mb_02') {
+        padding-top: 50px;
+        padding-bottom: 60px;
+      }
       .sec-title {
         color: #fff;
         > .wave {
@@ -358,26 +491,52 @@
           background-position: 0px 0, right 1px center;
           width: 369px;
           margin-left: 20px;
+          @include mediaMax('media-pc_04') {
+            width: 243px;
+            background-position: 0px 0, right 0px center;
+            margin-left: 0px;
+          }
         }
       }
       > .sec-content {
         margin-top: 43px;
         color: #fff;
+        @include mediaMax('media-pc_04') {
+          margin-top: 30px;
+        }
       }
       .ingradients-wrap {
         max-width: 1136px;
         margin: 0 auto;
         margin-top: 85px;
+        @include mediaMax('media-pc_04') {
+          margin-top: 60px;
+        }
       }
       .ingradientList {
         margin-left: -50px;
         margin-top: -60px;
         display: flex;
         flex-wrap: wrap;
+        @include mediaMax('media-pc_04') {
+          margin-left: -35px;
+          margin-top: -50px;
+          justify-content: center;
+        }
         > * {
           padding-left: 50px;
           padding-top: 60px;
           width: 33.333333333%;
+          @include mediaMax('media-pc_04') {
+            padding-left: 35px;
+            padding-top: 50px;
+          }
+          @include mediaMax('media-mb_02') {
+            width: 50%;
+          }
+          @include mediaMax('media-mb_04') {
+            width: 100%;
+          }
         }
       }
       .ingradient {
@@ -391,6 +550,10 @@
           width: 34%;
           border-radius: 50%;
           background-color: #fff;
+          @include mediaMax('media-pc_04') {
+            width: 46%;
+          }
+
           &:after {
             content: '';
             display: block;
@@ -414,6 +577,10 @@
           flex: 1;
           display: flex;
           align-items: center;
+          @include mediaMax('media-pc_04') {
+            @include fontSize(16px);
+            letter-spacing: 1.4px;
+          }
         }
         > .desBox {
           text-align: center;
@@ -422,6 +589,10 @@
           line-height: 28px;
           letter-spacing: 1px;
           margin-top: 10px;
+          @include mediaMax('media-pc_04') {
+            @include fontSize(14px);
+            line-height: 22px;
+          }
         }
         > .btnBox {
           margin-top: 20px;
@@ -437,6 +608,12 @@
         z-index: 1;
         margin-right: 140px;
         width: 100%;
+        @include mediaMax('media-pc_04') {
+          margin-right: 60px;
+        }
+        @include mediaMax('media-mb_02') {
+          margin-right: 20px;
+        }
       }
       .director-board {
         background-image: url('/image/director-bg.png');
@@ -449,6 +626,17 @@
         display: flex;
         align-items: center;
         color: #fff;
+        @include mediaMax('media-pc_04') {
+          padding: 40px 45px;
+          border-radius: 36px;
+          border-top-left-radius: 0;
+        }
+        @include mediaMax('media-mb_02') {
+          padding: 30px 25px;
+          border-radius: 26px;
+          border-top-left-radius: 0;
+          flex-direction: column;
+        }
         > .directorBox {
           display: flex;
           flex-direction: column;
@@ -461,17 +649,32 @@
             @include fontSize(20px);
             font-weight: 700;
             text-transform: uppercase;
+            @include mediaMax('media-pc_04') {
+              margin-top: 26px;
+              @include fontSize(18px);
+            }
           }
           .director-title {
             margin-top: 8px;
             @include fontSize(16px);
             font-style: italic;
             font-weight: 400;
+            @include mediaMax('media-pc_04') {
+              margin-top: 6px;
+              @include fontSize(14px);
+            }
           }
         }
         > .contentBox {
           flex: 1;
           padding-left: 88px;
+          @include mediaMax('media-pc_04') {
+            padding-left: 50px;
+          }
+          @include mediaMax('media-mb_02') {
+            padding-left: 0px;
+            margin-top: 20px;
+          }
           > .iconBox {
             .icon-leftQuote {
               display: block;
@@ -481,6 +684,12 @@
               background-repeat: no-repeat;
               background-size: 100%;
               background-position: center;
+              @include mediaMax('media-pc_04') {
+                width: 60px;
+              }
+              @include mediaMax('media-mb_02') {
+                width: 45px;
+              }
               &:after {
                 content: '';
                 display: block;
@@ -498,11 +707,23 @@
           font-weight: 400;
           line-height: 48px;
           letter-spacing: 2px;
+          @include mediaMax('media-pc_04') {
+            @include fontSize(16px);
+            line-height: 34px;
+          }
+          @include mediaMax('media-mb_02') {
+            @include fontSize(14px);
+            line-height: 26px;
+            text-align: center;
+          }
         }
         .avatar-circle {
           overflow: hidden;
           border-radius: 50%;
           max-width: 100%;
+          @include mediaMax('media-pc_04') {
+            width: 150px;
+          }
         }
       }
       .half-bg {
@@ -514,10 +735,20 @@
         top: 0;
         background-color: $themeColor1;
         border-bottom-right-radius: 50px;
+        @include mediaMax('media-pc_04') {
+          border-bottom-right-radius: 36px;
+        }
+        @include mediaMax('media-mb_02') {
+          border-bottom-right-radius: 26px;
+        }
       }
     }
     &.ourBrandExperience {
       margin-top: 87px;
+      @include mediaMax('media-pc_04') {
+        margin-top: 60px;
+        padding: 0 20px;
+      }
       .sec-title {
         > .wave {
           display: block;
@@ -527,10 +758,18 @@
           background-position: 0px 0, 54% center, right 1px center;
           width: 472px;
           margin-left: 20px;
+          @include mediaMax('media-pc_04') {
+            width: 324px;
+            background-position: 0px 0, 44% center, right 1px center;
+            margin-left: 0px;
+          }
         }
       }
       > .sec-content {
         margin-top: 54px;
+        @include mediaMax('media-pc_04') {
+          margin-top: 40px;
+        }
       }
       .clientList__container {
         max-width: 1040px;
@@ -549,15 +788,26 @@
         z-index: 1;
         max-width: 1040px;
         margin: 0 auto;
+        @include mediaMax('media-pc_04') {
+          padding: 10% 20px 9%;
+        }
       }
       .banner__wrap {
         display: flex;
         flex-wrap: wrap;
         position: relative;
+
         .imgBox {
           position: relative;
           width: 540px;
           flex-shrink: 0;
+          @include mediaMax('media-pc_04') {
+            max-width: 40%;
+          }
+          @include mediaMax('media-mb_01') {
+            width: 100%;
+            max-width: 100%;
+          }
         }
         .contentBox {
           flex: 1;
@@ -565,12 +815,26 @@
           padding-left: 65px;
           padding-top: 60px;
           padding-bottom: 80px;
+          @include mediaMax('media-pc_04') {
+            padding-left: 40px;
+            padding-top: 35px;
+            padding-bottom: 50px;
+          }
+          @include mediaMax('media-mb_01') {
+            width: 100%;
+            max-width: 100%;
+            flex: none;
+            padding-left: 0;
+          }
           .t1Box {
             padding-left: 10px;
             @include fontSize(16px);
             font-weight: 700;
             line-height: normal;
             letter-spacing: 2.222px;
+            @include mediaMax('media-pc_04') {
+              @include fontSize(14px);
+            }
           }
           .nameBox {
             margin-top: 12px;
@@ -578,6 +842,10 @@
             font-weight: 700;
             line-height: normal;
             letter-spacing: 3.636px;
+            @include mediaMax('media-pc_04') {
+              @include fontSize(28px);
+              letter-spacing: 2.636px;
+            }
           }
           .desBox {
             margin-top: 38px;
@@ -586,6 +854,10 @@
             font-weight: 400;
             line-height: 24px;
             letter-spacing: 1px;
+            @include mediaMax('media-pc_04') {
+              @include fontSize(14px);
+              margin-top: 28px;
+            }
           }
         }
         .btnBox {
@@ -598,9 +870,23 @@
           // left: 46%;
           // bottom: 0;
           // transform: translate(-50%, 64%);
+          @include mediaMax('media-pc_04') {
+            margin-top: -3%;
+          }
+          @include mediaMax('media-mb_02') {
+            margin-top: 0;
+          }
           .ds-button {
             padding-top: 58px;
             padding-bottom: 58px;
+            @include mediaMax('media-pc_04') {
+              padding-top: 28px;
+              padding-bottom: 28px;
+              margin-left: -30%;
+            }
+            @include mediaMax('media-mb_01') {
+              margin-left: 0;
+            }
           }
         }
         .paginationBox {
@@ -615,6 +901,20 @@
           font-weight: 300;
           line-height: normal;
           letter-spacing: 2.222px;
+          @include mediaMax('media-pc_04') {
+            @include fontSize(14px);
+            left: auto;
+            right: 10px;
+          }
+          @include mediaMax('media-mb_01') {
+            width: 40px;
+            @include fontSize(12px);
+            letter-spacing: 1.4px;
+            transform: translate(0, -100%) translateY(-15px);
+          }
+          @include mediaMax('media-mb_03') {
+            display: none;
+          }
 
           &:after {
             content: '';
@@ -639,6 +939,9 @@
             width: 34px;
             background-color: $themeColor1;
             transform: translate(-50%, -50%) skewY(-45deg);
+            @include mediaMax('media-mb_01') {
+              width: 26px;
+            }
           }
         }
       }
@@ -695,6 +998,10 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
+    @include mediaMax('media-pc_04') {
+      @include fontSize(20px);
+      letter-spacing: 2.636px;
+    }
     > .text {
       > .dot {
         display: inline-block;
@@ -703,6 +1010,10 @@
         background-color: $themeColor2;
         position: relative;
         left: 15px;
+        @include mediaMax('media-pc_04') {
+          width: 7px;
+          left: 8px;
+        }
         &::after {
           content: '';
           display: block;
@@ -713,6 +1024,10 @@
     > .wave {
       height: 13px;
       width: 100%;
+      background-size: auto 100%;
+      @include mediaMax('media-pc_04') {
+        height: 10px;
+      }
     }
   }
   .ds-anime-title {
@@ -732,7 +1047,9 @@
     font-weight: 400;
     line-height: 28px;
     letter-spacing: 1px;
-
+    @include mediaMax('media-pc_04') {
+      @include fontSize(14px);
+    }
     .highlight {
       color: $themeColor6;
     }
@@ -743,6 +1060,9 @@
     justify-content: center;
     &--moreIngradients {
       margin-top: 100px;
+      @include mediaMax('media-pc_04') {
+        margin-top: 60px;
+      }
     }
   }
   .ingradient {
@@ -787,6 +1107,11 @@
     border-radius: 99em;
     border: 2px solid #fff;
     text-transform: uppercase;
+    @include mediaMax('media-pc_04') {
+      @include fontSize(12px);
+      letter-spacing: 1.222px;
+      padding: 10px 15px;
+    }
   }
   .btn-moreIngradients {
     color: #fff;
@@ -794,6 +1119,7 @@
     font-weight: 700;
     line-height: normal;
     letter-spacing: 2px;
+    text-align: center;
     .text {
       @include textUnderLine(calc(40%), $themeColor6);
       padding: 0;
@@ -810,6 +1136,9 @@
   #flicking-projects {
     border-radius: 30px;
     cursor: grab;
+    @include mediaMax('media-mb_02') {
+      border-radius: 26px;
+    }
     .panel {
       position: relative;
       width: 100%;
@@ -830,6 +1159,9 @@
         content: '';
         display: block;
         padding-bottom: 100%;
+        @include mediaMax('media-mb_01') {
+          padding-bottom: 60%;
+        }
       }
     }
   }

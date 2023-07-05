@@ -1,5 +1,5 @@
 <template>
-  <i class="icon_nextOutlined" ref="selfIcon">
+  <i class="icon_navCloseOutlined" ref="selfIcon">
     <svg
       :width="size"
       :height="size"

@@ -1,5 +1,5 @@
 <template>
-  <i class="icon_nextOutlined" ref="selfIcon">
+  <i class="icon_navOutlined" ref="selfIcon">
     <svg
       :width="sizeW"
       :height="sizeH"
@@ -40,5 +40,6 @@ export default {
 <style lang="scss" scoped>
 .p_01 {
   fill: #fff;
+  transition: fill 0.3s ease;
 }
 </style>
