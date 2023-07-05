@@ -5,70 +5,214 @@
   bottom: 0;
   right: 0;
   z-index: 100;
+  .nav-menu__wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 0 140px;
+    overflow-x: visible;
+    overflow-y: auto;
+    padding-top: 92px;
+  }
   .nav-menu__container {
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
     z-index: 2;
-    width: 600px;
-    max-width: calc(100vw);
-    overflow: hidden;
+    width: 100%;
     nav {
       position: relative;
     }
-    > .bg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 0;
-      background-color: #eeee;
-      transition: all var(--NAV_MENU__closeDuration) $animeCubic1;
-      transform-origin: left;
-      transform: scaleX(0);
+  }
+  > .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    opacity: 0;
+    background: linear-gradient(
+      180deg,
+      #585880 0%,
+      #585880 50%,
+      $themeColor1 99.92%
+    );
+    background-size: 100% 200%;
+    background-position: 0% 0%;
+    transition: opacity var(--NAV_MENU__closeDuration)
+        cubic-bezier(0.52, 0.36, 0.12, 0.94),
+      background-position var(--NAV_MENU__closeDuration)
+        cubic-bezier(0.52, 0.36, 0.12, 0.94) 0.1s;
+    transform-origin: 50% 100%;
+    #{$navShowClass} & {
+      background-position: 0% 100%;
+      opacity: 0.8999999761581421;
+    }
+  }
+  .btn-close {
+    cursor: pointer;
+    position: absolute;
+    z-index: 2;
+    top: 38px;
+    right: 62px;
+    color: red;
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.52, 0.36, 0.12, 0.94);
+    #{$navShowClass} & {
+      opacity: 1;
+    }
+  }
+  .waterfall {
+    margin-left: -40px;
+  }
+  .Waterfall-item {
+    width: 33.3333333%;
+    padding-left: 40px;
+    margin-bottom: 40px;
+    .waterFallItem {
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 0.3s ease;
       #{$navShowClass} & {
+        opacity: 1;
         transform: none;
       }
     }
+    @for $i from 1 through 9 {
+      &:nth-child(#{$i}) {
+        .waterFallItem {
+          transition-delay: 0.05s * $i;
+        }
+      }
+    }
+    &.careers,
+    &.insights {
+      //width: 30%;
+      //flex: 1 1 30%;
+    }
+  }
+  .waterFallItem {
+    border-radius: 30px;
+    padding: 40px 38px;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+    .bg {
+      position: absolute;
+      z-index: 0;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .content__container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      .leftBox {
+      }
+      .rightBox {
+        padding-left: 17px;
+      }
+      .subTitleBox {
+        @include fontSize(16px);
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: 1.8px;
+      }
+      .nameBox {
+        margin-top: 4px;
+        .name {
+          $underLineThick: 6px;
+          @include fontSize(32px);
+          font-weight: 700;
+          line-height: normal;
+          letter-spacing: 3.636px;
+          .text {
+            @include textUnderLine($underLineThick, $themeColor6);
+            padding: 0;
+            transition: all 0.25s ease;
+            background-size: 0% $underLineThick;
+          }
+        }
+      }
+    }
+    &.about {
+      background-color: $themeColor1;
+      .bg {
+        background-image: url('/image/nav/bg-nav-about.png');
+      }
+    }
+    &.careers {
+      background-color: $themeColor7;
+      .bg {
+        background-image: url('/image/nav/bg-nav-careers.png');
+      }
+    }
+    &.services {
+      background-color: $themeColor5;
+      .bg {
+        background-image: url('/image/nav/bg-nav-services.png');
+      }
+    }
+    &.works {
+      background-color: $themeColor2;
+      .bg {
+        background-image: url('/image/nav/bg-nav-works.png');
+      }
+    }
+    &.insights {
+      background-color: $themeColor8;
+      .bg {
+        background-image: url('/image/nav/bg-nav-insights.png');
+      }
+    }
+    &.contact {
+      background-color: #fff;
+      .content__container {
+        .leftBox {
+          display: none;
+        }
+        .rightBox {
+          padding-left: 0;
+        }
+        .subTitleBox {
+          color: $themeColor3;
+        }
+        .nameBox {
+          .name {
+            color: $themeColor1;
+          }
+        }
+      }
+    }
+    &:hover {
+      .#{$uaPc} & {
+        .content__container {
+          .nameBox {
+            .name {
+              background-position: 100% 0;
+              .text {
+                background-size: 100% 6px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .item-move {
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    -webkit-transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
   }
   #{$navShowClass} & {
   }
 }
-// #{$navShowClass} {
-//   &#{$hasScrollSmoothClass}.has-scroll-init {
-//     #main-flex-inner,
-//     #ob-floatBar .ob-floatBar__boxInner,
-//     #tab_bar,
-//     #ob-quick-buy-bar {
-//       transform: translateX(20px);
-//       //會lag
-//       //filter: blur(3px);
-
-//       // for only firefox
-//       @-moz-document url-prefix() {
-//         filter: blur(0px);
-//       }
-//     }
-//   }
-//   &:not(#{$hasScrollSmoothClass}).has-scroll-init {
-//     header,
-//     main,
-//     footer,
-//     #ob-floatBar .ob-floatBar__boxInner,
-//     #tab_bar,
-//     #ob-quick-buy-bar {
-//       transform: translateX(20px);
-//       .#{$uaPc} & {
-//         //會lag
-//         //filter: blur(3px);
-
-//         // for only firefox
-//         @-moz-document url-prefix() {
-//           filter: blur(0px);
-//         }
-//       }
-//     }
-//   }
-// }

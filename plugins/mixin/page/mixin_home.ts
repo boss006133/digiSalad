@@ -128,6 +128,7 @@ export default Vue.extend({
       flickingProjectsDirection: '',
       bannerAnimeDone: false,
       LOCO_FADEUP: 'locoFadeUp',
+      projectsObject: null,
     }
   },
   head() {
@@ -139,11 +140,6 @@ export default Vue.extend({
       const self = this as any
       // return self.isYtApiDone && self.bannerAnimeDone
       return self.isYtApiDone
-    },
-    projectsObject(): any {
-      const self = this as any
-      const r = self.projects[self.flickingProjectsCurrent]
-      return r ? r : {}
     },
   },
   watch: {
@@ -188,6 +184,9 @@ export default Vue.extend({
   },
   mounted() {
     const self = this as any
+    self.$nextTick(() => {
+      self.setProjectsObject()
+    })
     self.initProjectsFlicking()
     self.initLocoScrollAnime()
   },
@@ -281,7 +280,6 @@ export default Vue.extend({
           break
         case 2: //已暫停
           self.aboutYtPlaying = false
-          console.warn(222)
           break
         default:
           break
@@ -360,11 +358,16 @@ export default Vue.extend({
       tl_end.play()
       tl_end.then(() => {
         self.flickingProjectsCurrent = currentIndex
+        self.setProjectsObject()
         self.$nextTick(() => {
           const tl_start = self.onChanged_Project_AnimeStart()
           tl_start.play()
         })
       })
+    },
+    setProjectsObject() {
+      const self = this as any
+      self.projectsObject = self.projects[self.flickingProjectsCurrent]
     },
     //project切換-動畫start
     onChanged_Project_AnimeStart() {
@@ -586,9 +589,10 @@ export default Vue.extend({
         const speed = args.speed
         if (typeof args.currentElements[banner] === 'object') {
           const progress = args.currentElements[banner].progress
+          // console.warn('progress', progress)
           // ouput log example: 0.34
           // gsap example : myGsapAnimation.progress(progress);
-          tl_banner.progress(progress).pause()
+          tl_banner.progress(progress)
         }
       })
     },
@@ -603,8 +607,11 @@ export default Vue.extend({
       const ElemP3UnderLine = ElemP3.querySelector('.ds-anime-title .text')
       const ElemP3Dot = ElemP3.querySelector('.ds-anime-title .dot')
       const ElemBgCover = ElemBanner.querySelector('.bg-cover__container')
+      const ElemBgChildItems = ElemBanner.querySelectorAll(
+        '.bg-cover__container > *'
+      )
       const p_animeDis = bannerRect.height * 0.3
-      const p_animeDisD = bannerRect.height * 0.1
+      const p_animeDisD = bannerRect.height * 0.05
       const ease = 'power2.out'
       const tl_start = gsap.timeline({ paused: true })
       tl_start
@@ -656,10 +663,19 @@ export default Vue.extend({
             borderBottomLeftRadius: '50px',
             borderBottomRightRadius: '50px',
             transformOrigin: '50% 100%',
-            y: -100,
+            y: '-100px',
             scale: 0.9,
             duration: 1.5,
             ease: 'power1.out',
+          },
+          0.5
+        )
+        .to(
+          [ElemBgChildItems],
+          {
+            y: '50%',
+            duration: 1.5,
+            ease: 'none',
           },
           0.5
         )

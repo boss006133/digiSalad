@@ -23,11 +23,13 @@
     }
   }
   &:hover {
-    > .text {
-      transform: translateX(42px);
-      letter-spacing: 3px;
-      &:after {
-        transform: translateX(-50%) scaleX(0);
+    .#{$uaPc} & {
+      > .text {
+        transform: translateX(42px);
+        letter-spacing: 3px;
+        &:after {
+          transform: translateX(-50%) scaleX(0);
+        }
       }
     }
   }
@@ -37,7 +39,9 @@
   &--primary {
     background-color: $themeColor1;
     &:hover {
-      background-color: darken($themeColor1, 5%);
+      .#{$uaPc} & {
+        background-color: darken($themeColor1, 5%);
+      }
     }
     &:active {
       background-color: lighten($themeColor1, 5%);
@@ -46,7 +50,9 @@
   &--second {
     background-color: $themeColor5;
     &:hover {
-      background-color: darken($themeColor5, 5%);
+      .#{$uaPc} & {
+        background-color: darken($themeColor5, 5%);
+      }
     }
     &:active {
       background-color: lighten($themeColor5, 5%);

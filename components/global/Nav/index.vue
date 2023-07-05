@@ -2,21 +2,123 @@
   <div :class="[`${classDefault}`]" ref="menuNav" v-show="open">
     <div class="nav-menu__container">
       <div class="nav-menu__wrap">
-        <div class="main-level__panel" data-scroll-container></div>
+        <Waterfall :options="options">
+          <WaterfallItem
+            v-for="(item, index) in items"
+            :key="index"
+            :class="[item.type]"
+          >
+            <nuxt-link
+              to="/"
+              class="waterFallItem"
+              :class="[item.type]"
+              :style="item.style"
+              :index="item.index"
+            >
+              <div class="content__container">
+                <div class="leftBox">
+                  <div class="iconBox">
+                    <i :class="[`icon-${item.type}`]"></i>
+                  </div>
+                </div>
+                <div class="rightBox">
+                  <div class="subTitleBox">{{ item.subTitle }}</div>
+                  <div class="nameBox">
+                    <div class="name">
+                      <span class="text">{{ item.name }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bg"></div>
+            </nuxt-link>
+          </WaterfallItem>
+        </Waterfall>
       </div>
-      <div class="bg"></div>
     </div>
-    <div class="bg-cover" @click.self="$Nav.close()"></div>
+    <div class="bg"></div>
+    <div class="btn-close" @click="$Nav.close()">
+      <NavCloseOutlined></NavCloseOutlined>
+    </div>
   </div>
 </template>
 <script lang="ts">
 import { gsap } from 'gsap'
+import { NavCloseOutlined } from '@/components/icons-ds'
+import { Waterfall, WaterfallItem } from 'vue2-waterfall'
+
 import { mapState, mapActions } from 'pinia'
-import useGlobalStore from '@/store/index'
 import usePopupStore from '@/store/popup'
+var ItemNav = (function () {
+  function generateItems() {
+    return [
+      {
+        index: 0,
+        id: '0',
+        width: 200,
+        height: 300,
+        type: 'about',
+        subTitle: 'EMPOWERING BRANDS',
+        name: 'ABOUT US',
+      },
+      {
+        index: 1,
+        id: '1',
+        width: 200,
+        height: 300,
+        type: 'careers',
+        subTitle: 'BE COOL WITH US',
+        name: 'CAREERS',
+      },
+      {
+        index: 2,
+        id: '2',
+        width: 200,
+        height: 300,
+        type: 'services',
+        subTitle: 'AREAS OF EXPERTISE',
+        name: 'SERVICES',
+      },
+      {
+        index: 3,
+        id: '3',
+        width: 200,
+        height: 300,
+        type: 'works',
+        subTitle: 'CASE STUDIES',
+        name: 'WORKS',
+      },
+      {
+        index: 4,
+        id: '4',
+        width: 200,
+        height: 300,
+        type: 'insights',
+        subTitle: 'OUR STRATEGIES',
+        name: 'INSIGHTS',
+      },
+      {
+        index: 5,
+        id: '5',
+        width: 200,
+        height: 300,
+        type: 'contact',
+        subTitle: 'START YOUR JOURNEY WITH US',
+        name: 'CONTACT',
+      },
+    ]
+  }
+  return {
+    get: generateItems,
+  }
+})()
 export default {
   name: 'PopupNav',
-  components: {},
+  components: {
+    NavCloseOutlined,
+    Waterfall,
+    WaterfallItem,
+  },
   props: {},
   data() {
     return {
@@ -24,52 +126,19 @@ export default {
       classActive: '--show',
       variablesName: '--NAV_MENU',
       open: false,
-      closeDuration: 350,
+      closeDuration: 550,
       closeTimer: null,
+      items: ItemNav.get(),
+      options: {},
     }
   },
   computed: {
-    ...mapState(useGlobalStore, {
-      menuData: (state: any) => state.SystemData.nav,
-      footerMenuData: (state: any) => state.SystemData.footerNav,
-    }),
     ...mapState(usePopupStore, {
       isActive: (state) => state.isShow_Nav,
     }),
     activeClass() {
       const self = this as any
       return `${self.classDefault}${self.classActive}`
-    },
-    defaultMenuTypeIndex() {
-      const self = this as any
-      return self.menuData.findIndex((object) => {
-        return object.path === self.menuTypeId
-      })
-    },
-    //首層 data
-    navMainCurrentData() {
-      const self = this as any
-      let r = self.$deepClone(self.menuData) || []
-      r = self.menuData.filter((object) => {
-        return object.path === self.menuTypeId
-      })
-      return r && r.length > 0 ? r[0].children : []
-    },
-    pickedLangText() {
-      const self = this as any
-      const r = self.langCurcyData.lang.filter(
-        (x) => x.value === self.radioLangGroup
-      )
-      const label = r && r.length > 0 ? r[0].label : ''
-      return label
-    },
-    pickedCurcyText() {
-      const self = this as any
-      const r = self.langCurcyData.curcy.filter(
-        (x) => x.value === self.radioCurcyGroup
-      )
-      const label = r && r.length > 0 ? r[0].label : ''
-      return label
     },
   },
   watch: {
@@ -82,13 +151,6 @@ export default {
         self.$nextTick(() => {
           setTimeout(() => {
             document.documentElement.classList.add(self.activeClass)
-            if (self.$refs.navSliderComp) {
-              self.$refs.navSliderComp.$refs.flicking.camera.destroy()
-              self.$refs.navSliderComp.$refs.flicking.resize()
-            }
-            setTimeout(() => {
-              self.updateNavSlider()
-            }, self.closeDuration)
           }, 1)
         })
       } else {

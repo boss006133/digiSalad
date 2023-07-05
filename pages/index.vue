@@ -42,8 +42,8 @@
         <span class="line"></span>
       </div>
       <div class="bg-cover__container">
-        <div class="default-bg" data-scroll data-scroll-speed="-8"></div>
-        <div class="video-wrap" data-scroll data-scroll-speed="-8">
+        <div class="default-bg"></div>
+        <div class="video-wrap">
           <div :id="`${bannerVideoId}`" class="brand-video"></div>
         </div>
       </div>
@@ -279,7 +279,7 @@
       </div>
     </section>
     <!-- PROJECTS -->
-    <section class="projects" ref="galleryComp">
+    <section class="projects" ref="galleryComp" v-if="projectsObject">
       <div class="banner__container">
         <div id="projects-slideContainer" class="banner__wrap">
           <div class="imgBox" data-scroll :data-scroll-call="LOCO_FADEUP">
