@@ -51,7 +51,7 @@ export default {
       // dom 畫面 & loading 全數結束
       window._body.classList.add(self.body_loadingfinished_class)
       setTimeout(() => {
-        //self.serverPending = false
+        self.serverPending = false
       }, self.bodyCoverFadeOute_duration + self.bodyCoverFadeOute_delay)
     },
     screenWidthState: {
@@ -63,13 +63,11 @@ export default {
             if (self.isCrawler || self.isServerApiError || sS_loadLanding) {
               self[actionIndex.SET_PAGELOADDONE]()
             } else {
-              // const openAnimeTL = self.landingAnime()
-              // openAnimeTL.play().then(() => {
-              //   self[actionIndex.SET_PAGELOADDONE]()
-              //   sessionStorage.setItem(st.st_loadLanding, 'Y')
-              // })
-              self[actionIndex.SET_PAGELOADDONE]()
-              sessionStorage.setItem(st.st_loadLanding, 'Y')
+              const openAnimeTL = self.landingAnime()
+              openAnimeTL.play().then(() => {
+                self[actionIndex.SET_PAGELOADDONE]()
+                sessionStorage.setItem(st.st_loadLanding, 'Y')
+              })
             }
 
             // const openAnimeTL = self.landingAnime()

@@ -1,8 +1,7 @@
 const env = require('dotenv').config()
 const isLocalhost = process.env.NODE_ENV === 'development'
-const features = ['fetch', 'Object.entries', 'IntersectionObserver'].join('%2C')
 export default {
-  mode: 'universal',
+  ssr: true,
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -23,12 +22,6 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    script: [
-      {
-        src: `https://polyfill.io/v3/polyfill.min.js?features=${features}`,
-        body: true,
-      },
-    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://use.typekit.net/wel8ibk.css' },
@@ -45,7 +38,7 @@ export default {
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/inject/index' },
+    { src: '~/plugins/inject/index', mode: 'client' },
     { src: '~/plugins/nuxt-server-init.server' },
     { src: '~/plugins/inject/popup' },
     { src: '~/plugins/third-party/youtubeApi.client' },
