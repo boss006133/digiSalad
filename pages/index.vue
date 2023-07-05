@@ -49,14 +49,19 @@
       </div>
     </section>
     <!-- ABOUT DIGISALAD -->
-    <section class="aboutDigiSalad" data-scroll data-scroll-id="aboutDigiSalad">
+    <section class="aboutDigiSalad">
       <div class="sec-title-warp">
-        <div class="sec-title">
+        <div class="sec-title" data-scroll :data-scroll-call="LOCO_FADEUP">
           <div class="text">ABOUT DIGISALAD<span class="dot"></span></div>
           <div class="wave"></div>
         </div>
       </div>
-      <div class="video-wrap">
+      <div
+        class="video-wrap"
+        data-scroll
+        data-scroll-offset="30%"
+        :data-scroll-call="LOCO_FADEUP"
+      >
         <div
           class="cover"
           @click="playAboutVideo"
@@ -66,7 +71,7 @@
         </div>
         <div :id="`${aboutVideoId}`" class="about-video"></div>
       </div>
-      <div class="sec-content">
+      <div class="sec-content" data-scroll :data-scroll-call="LOCO_FADEUP">
         <p>
           Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras
           ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta.
@@ -80,7 +85,7 @@
         </p>
       </div>
       <div class="btn__container">
-        <div class="item">
+        <div class="item" data-scroll :data-scroll-call="LOCO_FADEUP">
           <nuxt-link to="/" class="ds-button ds-button--primary">
             <span class="text">VIEW MORE</span>
           </nuxt-link>
@@ -88,7 +93,7 @@
       </div>
     </section>
     <!-- AWARDS -->
-    <section class="awards">
+    <section class="awards" data-scroll>
       <div class="awards-board-wrap">
         <div class="awards-board">
           <div class="contentBox">
@@ -125,12 +130,12 @@
     <!-- OUR INGRADIENTS -->
     <section class="ourIngradients">
       <div class="sec-title-warp">
-        <div class="sec-title">
+        <div class="sec-title" data-scroll :data-scroll-call="LOCO_FADEUP">
           <div class="text">OUR INGRADIENTS<span class="dot"></span></div>
           <div class="wave gray"></div>
         </div>
       </div>
-      <div class="sec-content">
+      <div class="sec-content" data-scroll :data-scroll-call="LOCO_FADEUP">
         <p>
           Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras
           ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta.
@@ -144,7 +149,7 @@
         </p>
       </div>
       <div class="btn__container">
-        <div class="item">
+        <div class="item" data-scroll :data-scroll-call="LOCO_FADEUP">
           <button class="ds-button ds-button--second">
             <span class="text">OUR SERVICES</span>
           </button>
@@ -153,7 +158,12 @@
       <div class="ingradients-wrap">
         <div class="ingradientList">
           <div class="item" v-for="(item, index) in ingradients" :key="index">
-            <div class="ingradient">
+            <div
+              class="ingradient"
+              data-scroll
+              data-scroll-offset="20%"
+              :data-scroll-call="LOCO_FADEUP"
+            >
               <div class="iconBox">
                 <div
                   class="i-circle"
@@ -178,7 +188,12 @@
       </div>
       <div class="btn__container btn__container--moreIngradients">
         <div class="item">
-          <nuxt-link to="/" class="btn-moreIngradients">
+          <nuxt-link
+            to="/"
+            class="btn-moreIngradients"
+            data-scroll
+            :data-scroll-call="LOCO_FADEUP"
+          >
             <span class="text"
               >&nbsp;VIEW MORE DIGISALAD’S INGRADIENTS&nbsp;</span
             >
@@ -231,12 +246,12 @@
     <!-- OUR BRAND EXPERIENCE -->
     <section class="ourBrandExperience">
       <div class="sec-title-warp">
-        <div class="sec-title">
+        <div class="sec-title" data-scroll :data-scroll-call="LOCO_FADEUP">
           <div class="text">OUR BRAND EXPERIENCE<span class="dot"></span></div>
           <div class="wave"></div>
         </div>
       </div>
-      <div class="sec-content">
+      <div class="sec-content" data-scroll :data-scroll-call="LOCO_FADEUP">
         <p>
           Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras
           ullamcorper bibendum bibendum. Duis tincidunt urna non pretium porta.
@@ -249,7 +264,12 @@
           molestie faucibus.
         </p>
       </div>
-      <div class="clientList__container">
+      <div
+        class="clientList__container"
+        data-scroll
+        data-scroll-offset="10%"
+        :data-scroll-call="LOCO_FADEUP"
+      >
         <img
           src="/image/DigiSalad-Client-List.png"
           alt="DigiSalad Client List"
@@ -262,7 +282,7 @@
     <section class="projects" ref="galleryComp">
       <div class="banner__container">
         <div id="projects-slideContainer" class="banner__wrap">
-          <div class="imgBox">
+          <div class="imgBox" data-scroll :data-scroll-call="LOCO_FADEUP">
             <!-- Flicking Viewport element -->
             <div
               :id="`flicking-projects`"
@@ -290,7 +310,7 @@
               </div>
             </div>
           </div>
-          <div class="contentBox">
+          <div class="contentBox" data-scroll :data-scroll-call="LOCO_FADEUP">
             <div class="t1Box">{{ projectsObject.t1 }}</div>
             <div class="nameBox">
               <div class="ds-anime-title">
@@ -311,12 +331,16 @@
               nec lacus. Cras lobortis molestie faucibus.
             </div>
           </div>
-          <div class="btnBox">
+          <div class="btnBox" data-scroll :data-scroll-call="LOCO_FADEUP">
             <nuxt-link to="/" class="ds-button ds-button--primary">
               <span class="text">VIEW PROJECT</span>
             </nuxt-link>
           </div>
-          <div class="paginationBox">
+          <div
+            class="paginationBox"
+            data-scroll
+            :data-scroll-call="LOCO_FADEUP"
+          >
             <div class="current">
               <span class="text">{{
                 String(flickingProjectsCurrent + 1).padStart(2, '0')
@@ -331,11 +355,17 @@
           </div>
           <!-- button prev -->
           <span class="flicking-arrow-prev">
-            <PrevOutlined></PrevOutlined>
+            <PrevOutlined
+              data-scroll
+              :data-scroll-call="LOCO_FADEUP"
+            ></PrevOutlined>
           </span>
           <!-- button next -->
           <span class="flicking-arrow-next">
-            <NextOutlined></NextOutlined>
+            <NextOutlined
+              data-scroll
+              :data-scroll-call="LOCO_FADEUP"
+            ></NextOutlined>
           </span>
         </div>
       </div>

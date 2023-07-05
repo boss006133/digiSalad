@@ -8,7 +8,7 @@ const flickingProjectsOptions = {
   align: 'prev',
   circular: true,
   disableInput: false,
-  duration: 350,
+  duration: 800,
   //easing: easing.easeInOutCubic,
   interruptable: true,
   moveType: ['strict', { count: 1 }],
@@ -127,6 +127,7 @@ export default Vue.extend({
       flickingProjectsCurrent: 0,
       flickingProjectsDirection: '',
       bannerAnimeDone: false,
+      LOCO_FADEUP: 'locoFadeUp',
     }
   },
   head() {
@@ -136,7 +137,8 @@ export default Vue.extend({
     //偵測是否可以載入 youtube video
     canLoadYtVideo() {
       const self = this as any
-      return self.isYtApiDone && self.bannerAnimeDone
+      // return self.isYtApiDone && self.bannerAnimeDone
+      return self.isYtApiDone
     },
     projectsObject(): any {
       const self = this as any
@@ -187,7 +189,7 @@ export default Vue.extend({
   mounted() {
     const self = this as any
     self.initProjectsFlicking()
-    self.initScrollAnime()
+    self.initLocoScrollAnime()
   },
   methods: {
     //create youtube video api
@@ -477,16 +479,20 @@ export default Vue.extend({
     //banner進場-動畫start
     banner_AnimeStart() {
       const self = this as any
-      const ElemLogo = self.$refs.banner.querySelector('.logo')
-      const ElemP1 = self.$refs.banner.querySelector('.p-1')
-      const ElemP2 = self.$refs.banner.querySelector('.p-2')
-      const ElemP3 = self.$refs.banner.querySelector('.p-3')
+      const ElemBanner = self.$refs.banner
+      const bannerRect = ElemBanner.getBoundingClientRect()
+      const ElemLogo = ElemBanner.querySelector('.logo')
+      const ElemP1 = ElemBanner.querySelector('.p-1')
+      const ElemP2 = ElemBanner.querySelector('.p-2')
+      const ElemP3 = ElemBanner.querySelector('.p-3')
       const ElemP3UnderLine = ElemP3.querySelector('.ds-anime-title .text')
       const ElemP3Dot = ElemP3.querySelector('.ds-anime-title .dot')
-      const ElemAgency = self.$refs.banner.querySelector('.agency')
-      const ElemTasteUsNow = self.$refs.banner.querySelector('.tasteUsNow')
-      const ElemLineScroll = self.$refs.banner.querySelector('.line-scroll')
-
+      const ElemAgency = ElemBanner.querySelector('.agency')
+      const ElemTasteUsNow = ElemBanner.querySelector('.tasteUsNow')
+      const ElemLineScroll = ElemBanner.querySelector('.line-scroll')
+      const ElemBgCover = ElemBanner.querySelector('.bg-cover__container')
+      const bg_animeDis = bannerRect.height * 0.15
+      const p_animeDis = bannerRect.height * 0.1
       const ease = 'power2.inOut'
       const tl_start = gsap.timeline({ paused: true })
       tl_start
@@ -496,13 +502,14 @@ export default Vue.extend({
         .set([ElemTasteUsNow, ElemLineScroll], {
           y: '20%',
         })
-        .set([ElemLogo], {
-          opacity: 0,
-          y: '30%',
+        .set([ElemBgCover], {
+          y: bg_animeDis,
         })
-        .set([ElemP1, ElemP2, ElemP3], {
+        .set([ElemLogo, ElemP1, ElemP2, ElemP3], {
           opacity: 0,
-          x: '-10%',
+          y: p_animeDis,
+          z: '-30px',
+          rotateX: '-42deg',
         })
         .set([ElemP3Dot], {
           opacity: 0,
@@ -513,19 +520,20 @@ export default Vue.extend({
         })
       tl_start
         .to(
-          [ElemLogo],
+          [ElemBgCover],
           {
             y: '0',
-            opacity: 1,
             duration: 1.5,
             ease,
           },
           0
         )
         .to(
-          [ElemP1, ElemP2, ElemP3],
+          [ElemLogo, ElemP1, ElemP2, ElemP3],
           {
-            x: '0',
+            y: '0',
+            z: '0',
+            rotateX: '0deg',
             opacity: 1,
             duration: 1.5,
             ease,
@@ -568,14 +576,13 @@ export default Vue.extend({
 
       return tl_start
     },
-    initScrollAnime() {
+    initLocoScrollAnime() {
       const self = this as any
       const tl_banner = self.banner_AnimeScroll()
       //tl_banner.seek(5)
       window.LocomotiveScroll.on('scroll', (args) => {
         // Get all current elements : args.currentElements
         const banner = 'banner'
-        const aboutDigiSalad = 'aboutDigiSalad'
         const speed = args.speed
         if (typeof args.currentElements[banner] === 'object') {
           const progress = args.currentElements[banner].progress
@@ -583,26 +590,21 @@ export default Vue.extend({
           // gsap example : myGsapAnimation.progress(progress);
           tl_banner.progress(progress).pause()
         }
-        // if (typeof args.currentElements[aboutDigiSalad] === 'object') {
-        //   const progress = args.currentElements[aboutDigiSalad].progress
-        // }
       })
     },
     banner_AnimeScroll() {
       const self = this as any
       const ElemBanner = self.$refs.banner
-      const ElemLogo = self.$refs.banner.querySelector('.logo')
-      const ElemP1 = self.$refs.banner.querySelector('.p-1')
-      const ElemP2 = self.$refs.banner.querySelector('.p-2')
-      const ElemP3 = self.$refs.banner.querySelector('.p-3')
+      const bannerRect = ElemBanner.getBoundingClientRect()
+      const ElemLogo = ElemBanner.querySelector('.logo')
+      const ElemP1 = ElemBanner.querySelector('.p-1')
+      const ElemP2 = ElemBanner.querySelector('.p-2')
+      const ElemP3 = ElemBanner.querySelector('.p-3')
       const ElemP3UnderLine = ElemP3.querySelector('.ds-anime-title .text')
       const ElemP3Dot = ElemP3.querySelector('.ds-anime-title .dot')
-      const ElemBgCover = self.$refs.banner.querySelector(
-        '.bg-cover__container'
-      )
-      const ElemTasteUsNow = self.$refs.banner.querySelector('.tasteUsNow')
-      const ElemLineScroll = self.$refs.banner.querySelector('.line-scroll')
-
+      const ElemBgCover = ElemBanner.querySelector('.bg-cover__container')
+      const p_animeDis = bannerRect.height * 0.3
+      const p_animeDisD = bannerRect.height * 0.1
       const ease = 'power2.out'
       const tl_start = gsap.timeline({ paused: true })
       tl_start
@@ -622,7 +624,7 @@ export default Vue.extend({
             opacity: 0,
             y: (index, target, targets) => {
               //function-based value
-              return `${index * 100 + 400}%`
+              return `${index * p_animeDisD + p_animeDis}px`
             },
             duration: 1.5,
             ease: 'none',
@@ -653,9 +655,11 @@ export default Vue.extend({
           {
             borderBottomLeftRadius: '50px',
             borderBottomRightRadius: '50px',
+            transformOrigin: '50% 100%',
+            y: -100,
             scale: 0.9,
             duration: 1.5,
-            ease,
+            ease: 'power1.out',
           },
           0.5
         )
