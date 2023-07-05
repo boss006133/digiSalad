@@ -1,5 +1,13 @@
 const env = require('dotenv').config()
 const isLocalhost = process.env.NODE_ENV === 'development'
+const localHostPort = 3000
+const serverHost = isLocalhost
+  ? {
+      server: {
+        port: localHostPort, // default: 3000
+      },
+    }
+  : {}
 export default {
   ssr: true,
   /*
@@ -27,7 +35,7 @@ export default {
       { rel: 'stylesheet', href: 'https://use.typekit.net/wel8ibk.css' },
     ],
   },
-  // Global CSS: https://go.nuxtjs.dev/config-css 
+  // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/global'],
   styleResources: {
     scss: [
@@ -50,7 +58,7 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: false,
-
+  dev: isLocalhost,
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     'nuxt-esbuild',
@@ -100,12 +108,19 @@ export default {
     display: 'swap',
     prefetch: true,
   },
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: !isProduction,
+      //ignoredElements: [/^swal-/],
+    },
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    https: true,
   },
-
+  ...serverHost,
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     cssSourceMap: true,
