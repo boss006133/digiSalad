@@ -54,5 +54,8 @@
     "sass": "^1.35.2",
     "sass-loader": "^10.2.0",
     "speed-measure-webpack-plugin": "^1.4.2"
+  },
+  "engines": {
+    "node": ">=16.0.0 <17.0.0"
   }
 }
