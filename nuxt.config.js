@@ -27,7 +27,7 @@ export default {
       { rel: 'stylesheet', href: 'https://use.typekit.net/wel8ibk.css' },
     ],
   },
-  // Global CSS: https://go.nuxtjs.dev/config-css
+  // Global CSS: https://go.nuxtjs.dev/config-css 
   css: ['@/assets/css/global'],
   styleResources: {
     scss: [
@@ -38,7 +38,7 @@ export default {
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/inject/index', mode: 'client' },
+    { src: '~/plugins/inject/index' },
     { src: '~/plugins/nuxt-server-init.server' },
     { src: '~/plugins/inject/popup' },
     { src: '~/plugins/third-party/youtubeApi.client' },
