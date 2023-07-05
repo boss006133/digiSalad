@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development nuxt",
-    "build": "cross-env NODE_ENV=production nuxt build",
+    "build": "cross-env NODE_ENV=production HOST=0.0.0.0 nuxt build",
     "start": "cross-env nuxt start",
     "generate": "cross-env nuxt generate",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
     "lint": "npm run lint:js && npm run lint:prettier",
-    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix"
+    "lintfix": "prettier --write --list-different . && npm run lint:js -- --fix",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@egjs/flicking-plugins": "^4.5.0",
