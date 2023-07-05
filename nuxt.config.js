@@ -1,5 +1,6 @@
 const env = require('dotenv').config()
 const isLocalhost = process.env.NODE_ENV === 'development'
+const isProduction = process.env.NODE_ENV === 'production'
 const localHostPort = 3000
 const serverHost = isLocalhost
   ? {
