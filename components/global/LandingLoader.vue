@@ -51,7 +51,7 @@ export default {
       // dom 畫面 & loading 全數結束
       window._body.classList.add(self.body_loadingfinished_class)
       setTimeout(() => {
-        self.serverPending = false
+        //self.serverPending = false
       }, self.bodyCoverFadeOute_duration + self.bodyCoverFadeOute_delay)
     },
     screenWidthState: {
