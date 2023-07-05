@@ -1,7 +1,8 @@
 const env = require('dotenv').config()
 const isLocalhost = process.env.NODE_ENV === 'development'
+const features = ['fetch', 'Object.entries', 'IntersectionObserver'].join('%2C')
 export default {
-  ssr: true,
+  mode: 'universal',
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -21,6 +22,12 @@ export default {
       },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+    ],
+    script: [
+      {
+        src: `https://polyfill.io/v3/polyfill.min.js?features=${features}`,
+        body: true,
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
