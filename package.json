@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nuxt",
     "build": "cross-env NODE_ENV=production HOST=0.0.0.0 nuxt build",
-    "start": "cross-env nuxt start",
+    "start": "cross-env node server",
+    "start-server": "cross-env nuxt start",
     "generate": "cross-env NODE_ENV=production nuxt generate",
     "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
     "lint:prettier": "prettier --check .",
@@ -24,6 +25,7 @@
     "core-js": "^3.25.3",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
+    "express": "^4.17.3",
     "gsap": "^3.8.0",
     "locomotive-scroll": "^4.1.4",
     "nuxt": "^2.15.8",

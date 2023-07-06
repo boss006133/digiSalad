@@ -9,7 +9,7 @@ const serverHost = isLocalhost
       },
     }
   : {}
-export default {
+module.exports = {
   ssr: true,
   /*
    ** Nuxt target
