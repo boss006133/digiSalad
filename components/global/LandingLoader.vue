@@ -7,11 +7,19 @@
     </div>
     <div class="loader__bg"></div>
     <div class="loader__bg2"></div>
-    <!-- <div class="loader__rim">
-      <span class="rim rim-1"></span>
-      <span class="rim rim-2"></span>
-      <span class="stuff stuff-5"></span>
-    </div> -->
+    <div class="loader__animeBox">
+      <div class="logo-split-text">
+        <span
+          v-for="(item, index) in logoSplitText"
+          :key="index"
+          :class="[`logo-t-${index}`]"
+          >{{ item }}</span
+        >
+        <span class="i-circle">
+          <span class="i-circle-anime"></span>
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,9 +39,15 @@ export default {
       page_load_animation_delay: 0,
       loadingtext: 0,
       loadingtextEnd: false,
+      logoWord: 'DIGISALAD',
     }
   },
-  computed: {},
+  computed: {
+    logoSplitText() {
+      const self = this as any
+      return self.logoWord.split('')
+    },
+  },
   watch: {
     isLoadingDone(newValue, oldValue) {
       const self = this as any
@@ -60,20 +74,20 @@ export default {
         if ((oldValue === null || !oldValue) && process.client) {
           if (await self.extraLoadListen()) {
             const sS_loadLanding = sessionStorage.getItem(st.st_loadLanding)
-            if (self.isCrawler || self.isServerApiError || sS_loadLanding) {
+            // if (self.isCrawler || self.isServerApiError || sS_loadLanding) {
+            //   //self[actionIndex.SET_PAGELOADDONE]()
+            // } else {
+            //   const openAnimeTL = self.landingAnime()
+            //   openAnimeTL.play().then(() => {
+            //     self[actionIndex.SET_PAGELOADDONE]()
+            //     sessionStorage.setItem(st.st_loadLanding, 'Y')
+            //   })
+            // }
+            const done = () => {
               self[actionIndex.SET_PAGELOADDONE]()
-            } else {
-              const openAnimeTL = self.landingAnime()
-              openAnimeTL.play().then(() => {
-                self[actionIndex.SET_PAGELOADDONE]()
-                sessionStorage.setItem(st.st_loadLanding, 'Y')
-              })
             }
-
-            // const openAnimeTL = self.landingAnime()
-            // openAnimeTL.play().then(() => {
-            //   self[actionIndex.SET_PAGELOADDONE]()
-            // })
+            const openAnimeTL = self.landingAnime(done)
+            openAnimeTL.play()
           }
         }
       },
@@ -113,27 +127,138 @@ export default {
       const res = await self.loadImage(imgs)
       return res
     },
-    landingAnime() {
+    landingAnime(triggerEnd) {
       const self = this as any
+      const ElemLoaderAnime = document.querySelector('.loader__animeBox')
       const _loader = document.getElementById('landingLoader')
-      if (!_loader) return gsap.timeline({})
+      if (!_loader || !ElemLoaderAnime) return gsap.timeline({})
 
-      const randomRadius = gsap.utils.random(20, 80, 0, true)
-      const randomRotate = gsap.utils.random(-50, 50, 20, true)
-      const randomScale = gsap.utils.random(0.7, 1, 0, true)
-      const repeatRim = 0
-      const repeatDelayRim = 0
-      const durationRim = 0
-      const durationStuff = (repeatDelayRim + durationRim) * repeatRim + 0.2
+      const ElemLogoT0 = ElemLoaderAnime.querySelector('.logo-t-0')
+      const ElemLogoT1 = ElemLoaderAnime.querySelector('.logo-t-1')
+      const ElemLogoT2 = ElemLoaderAnime.querySelector('.logo-t-2')
+      const ElemLogoT3 = ElemLoaderAnime.querySelector('.logo-t-3')
+      const ElemLogoT4 = ElemLoaderAnime.querySelector('.logo-t-4')
+      const ElemLogoT5 = ElemLoaderAnime.querySelector('.logo-t-5')
+      const ElemLogoT6 = ElemLoaderAnime.querySelector('.logo-t-6')
+      const ElemLogoT7 = ElemLoaderAnime.querySelector('.logo-t-7')
+      const ElemLogoT8 = ElemLoaderAnime.querySelector('.logo-t-8')
+      const ElemICircle = ElemLoaderAnime.querySelector('.i-circle')
+      let tl = gsap.timeline({})
+      tl.set([ElemICircle], {
+        opacity: 0,
+        scale: 1,
+      })
 
-      let tl = gsap.timeline({}).to(
-        { t: 0 },
+      tl.to(
+        [ElemICircle],
         {
-          t: 100,
-          duration: 0.2,
+          keyframes: {
+            '0%': { opacity: 0 },
+            '15%': { opacity: 1, y: '-160%' },
+            '25%': { scale: 1.6 },
+            '40%': { scale: 1 },
+            '60%': { y: '350%' },
+            '100%': { y: 0 },
+          },
+          duration: 1,
+          //ease: '',
         },
         0
       )
+        .to(
+          [ElemLogoT3],
+          {
+            keyframes: {
+              '0%': { scaleY: 1 },
+              //'15%': { opacity: 1, y: '-20px' },
+              '40%': { color: 'transparent' },
+              '50%': { scaleY: 0.1, color: '#fff' },
+              '75%': { scaleY: 1.1 },
+              '100%': { scaleY: 1 },
+            },
+            duration: 0.9,
+            //ease: '',
+          },
+          0.3
+        )
+        .to(
+          [
+            ElemLogoT0,
+            ElemLogoT1,
+            ElemLogoT2,
+            ElemLogoT3,
+            ElemLogoT4,
+            ElemLogoT5,
+            ElemLogoT6,
+            ElemLogoT7,
+            ElemLogoT8,
+          ],
+          {
+            keyframes: {
+              '0%': { y: 0 },
+              '20%': { y: '50%', color: 'transparent', scaleY: 0.5 },
+              '30%': { color: '#fff' },
+              '50%': { y: '-30%', scaleY: 1 },
+              '65%': { y: '20%' },
+              '75%': { y: '-11%' },
+              '82%': { y: '5%' },
+              '100%': { y: '0%' },
+              ease: 'power1.out',
+            },
+            ease: 'power1.in',
+            //ease: 'elastic.out(1, 0.3)',
+            stagger: {
+              from: 3,
+              each: 0.03,
+              //ease: 'power1.in',
+            },
+            duration: 1.7,
+            //ease: '',
+          },
+          0.55
+        )
+        .call(triggerEnd)
+        .to(
+          [
+            ElemLogoT0,
+            ElemLogoT1,
+            ElemLogoT2,
+            ElemLogoT3,
+            ElemLogoT4,
+            ElemLogoT5,
+            ElemLogoT6,
+            ElemLogoT7,
+            ElemLogoT8,
+          ],
+          {
+            keyframes: {
+              '0%': { y: 0 },
+              '30%': { y: '30%' },
+              '100%': { y: '-500%', opacity: 0 },
+              ease: 'power1.out',
+            },
+            ease: 'power1.out',
+            stagger: {
+              from: 4,
+              each: 0.03,
+              ease: 'power1.in',
+            },
+            duration: 1.7,
+            //ease: '',
+          },
+          1.6
+        )
+        .to(
+          [ElemICircle],
+          {
+            opacity: 0,
+            scale: 0,
+            ease: 'power1.out',
+            duration: 1,
+          },
+          1.65
+        )
+
       tl.pause()
       return tl
     },

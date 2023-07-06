@@ -60,6 +60,65 @@ body {
     transform-origin: 50% 0;
     transition: $bg_transition;
   }
+  .loader__animeBox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    @include fontSize(30px);
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include mediaMax('media-pc_04') {
+      @include fontSize(25px);
+    }
+    @include mediaMax('media-mb_03') {
+      @include fontSize(20px);
+    }
+  }
+  .i-circle {
+    position: absolute;
+    left: 17.43%;
+    top: 40px;
+    background-color: $themeColor2;
+    width: 8px;
+    border-radius: 50%;
+    @include mediaMax('media-pc_04') {
+      top: 41px;
+      width: 7px;
+    }
+    @include mediaMax('media-mb_03') {
+      width: 6px;
+    }
+    &:after {
+      content: '';
+      display: block;
+      padding-bottom: 100%;
+    }
+  }
+  .logo-split-text {
+    position: relative;
+    padding: 50px 0 0;
+    margin-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    > * {
+      //color: #fff;
+      margin: 0 5%;
+      color: transparent;
+      -webkit-text-stroke: 0.6px #fff;
+      transform-origin: 50% 100%;
+      @include mediaMax('media-pc_04') {
+        -webkit-text-stroke: 0.4px #fff;
+      }
+      @include mediaMax('media-mb_03') {
+        -webkit-text-stroke: 0.4px #fff;
+      }
+    }
+  }
 }
 
 .animate__bounceIn {

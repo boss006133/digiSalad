@@ -59,7 +59,7 @@
       <div
         class="video-wrap"
         data-scroll
-        data-scroll-offset="30%"
+        :data-scroll-offset="isMedia.mb_04 ? '15%' : '30%'"
         :data-scroll-call="LOCO_FADEUP"
       >
         <div
@@ -94,7 +94,7 @@
     </section>
     <!-- AWARDS -->
     <section class="awards" data-scroll>
-      <div class="awards-board-wrap">
+      <div class="awards-board-wrap" data-scroll data-scroll-speed="1">
         <div class="awards-board">
           <div class="contentBox">
             <div class="sec-title-warp">
@@ -175,7 +175,7 @@
             <div
               class="ingradient"
               data-scroll
-              data-scroll-offset="20%"
+              :data-scroll-offset="isMedia.mb_04 ? '0' : '200px'"
               :data-scroll-call="LOCO_FADEUP"
             >
               <div class="iconBox">
@@ -194,6 +194,8 @@
               <div class="btnBox">
                 <nuxt-link to="/" class="btn-viewMore">
                   <span class="text">{{ item.btnText }}</span>
+                  <span class="border"></span>
+                  <span class="bg"></span>
                 </nuxt-link>
               </div>
             </div>
@@ -216,10 +218,14 @@
       </div>
     </section>
     <!-- DIRECTOR -->
-    <section class="director">
-      <div class="director-board-wrap">
+    <section class="director" data-scroll>
+      <div class="director-board-wrap" data-scroll data-scroll-speed="1.5">
         <div class="director-board">
-          <div class="directorBox">
+          <div
+            class="directorBox"
+            data-scroll
+            :data-scroll-offset="isMedia.pc_03 ? '30%' : '-150px'"
+          >
             <div class="director-avatar">
               <div class="avatar-circle">
                 <img
@@ -234,11 +240,21 @@
             <div class="director-title">Founder & Creative Director</div>
           </div>
           <div class="contentBox">
-            <div class="iconBox">
+            <div
+              class="iconBox"
+              data-scroll
+              :data-scroll-call="LOCO_FADEUP"
+              data-scroll-offset="-150px"
+            >
               <i class="icon-leftQuote"></i>
             </div>
             <div class="contentBox">
-              <div class="sec-content">
+              <div
+                class="sec-content"
+                data-scroll
+                :data-scroll-call="LOCO_FADEUP"
+                data-scroll-offset="-150px"
+              >
                 <p>
                   A great digital work isn’t about designing beautiful pages
                   purely. It is about context - how do we deliver the
