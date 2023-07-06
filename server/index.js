@@ -40,7 +40,7 @@ async function start() {
   // Listen the server
   const server_http = http.createServer(app)
 
-  server_http.listen(port || 5000, host, () => {
+  server_http.listen(port || 3000, host, () => {
     consola.ready({
       message: `Server listening on http://${host}:${port}`,
       badge: true,
