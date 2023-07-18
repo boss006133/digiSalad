@@ -199,7 +199,7 @@ export default Vue.extend({
           height: '720',
           width: '1280',
           videoId: self.bannerEmbedId,
-          host: 'https://www.youtube-nocookie.com',
+          host: 'https://www.youtube.com',
           playerVars: {
             widgetid: 1,
             autoplay: 1,
@@ -609,8 +609,8 @@ export default Vue.extend({
       const ElemBgChildItems = ElemBanner.querySelectorAll(
         '.bg-cover__container > *'
       )
-      const p_animeDis = bannerRect.height * 0.3
-      const p_animeDisD = bannerRect.height * 0.05
+      const p_animeDis = bannerRect.height * 0.4
+      const p_animeDisD = bannerRect.height * 0.2
       const ease = 'power2.out'
       const tl_start = gsap.timeline({ paused: true })
       tl_start
